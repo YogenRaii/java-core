@@ -1,0 +1,38 @@
+# Intellij
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# Mac
+.DS_Store
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+# Gradle
+.gradle
+# Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored).
+# Add this 'after' *.jar ignore
+!gradle-wrapper.jar
+
+# Binaries
+build
+target
+out
+classes
+reports
+bin
+*.class
+
+#Eclipse
+.classpath
+.project
+.settings
+
+# Vagrant, Ansible and Docker
+.vagrant
+.docker
+*.retry

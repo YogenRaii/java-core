@@ -1,0 +1,20 @@
+# PRE-DEFINED CACHE REGIONS
+jcs.region.testCache1=DC
+jcs.region.testCache1.cacheattributes=org.apache.commons.jcs.engine.CompositeCacheAttributes
+jcs.region.testCache1.cacheattributes.MaxObjects=1000
+jcs.region.testCache1.cacheattributes.MemoryCacheName=org.apache.commons.jcs.engine.memory.lru.LRUMemoryCache
+jcs.region.testCache1.cacheattributes.UseMemoryShrinker=false
+jcs.region.testCache1.cacheattributes.MaxMemoryIdleTimeSeconds=3600
+jcs.region.testCache1.cacheattributes.ShrinkerIntervalSeconds=60
+jcs.region.testCache1.cacheattributes.MaxSpoolPerRun=500
+jcs.region.testCache1.elementattributes=org.apache.commons.jcs.engine.ElementAttributes
+jcs.region.testCache1.elementattributes.IsEternal=false
+
+# AVAILABLE AUXILIARY CACHES
+jcs.auxiliary.DC=org.apache.commons.jcs.auxiliary.disk.indexed.IndexedDiskCacheFactory
+jcs.auxiliary.DC.attributes=org.apache.commons.jcs.auxiliary.disk.indexed.IndexedDiskCacheAttributes
+jcs.auxiliary.DC.attributes.DiskPath=${user.dir}/jcs_swap
+jcs.auxiliary.DC.attributes.MaxPurgatorySize=10000000
+jcs.auxiliary.DC.attributes.MaxKeySize=1000000
+jcs.auxiliary.DC.attributes.OptimizeAtRemoveCount=300000
+jcs.auxiliary.DC.attributes.ShutdownSpoolTimeLimit=60

@@ -1,0 +1,36 @@
+# DEFAULT CACHE REGION
+jcs.default=DC
+jcs.default.cacheattributes=org.apache.commons.jcs.engine.CompositeCacheAttributes
+jcs.default.cacheattributes.MaxObjects=1000
+jcs.default.cacheattributes.MemoryCacheName=org.apache.commons.jcs.engine.memory.lru.LRUMemoryCache
+jcs.default.cacheattributes.UseMemoryShrinker=false
+jcs.default.cacheattributes.MaxMemoryIdleTimeSeconds=3600
+jcs.default.cacheattributes.ShrinkerIntervalSeconds=60
+jcs.default.elementattributes=org.apache.commons.jcs.engine.ElementAttributes
+jcs.default.elementattributes.IsEternal=false
+jcs.default.elementattributes.MaxLife=21600
+jcs.default.elementattributes.IdleTime=1800
+jcs.default.elementattributes.IsSpool=true
+jcs.default.elementattributes.IsRemote=true
+jcs.default.elementattributes.IsLateral=true
+
+# PRE-DEFINED CACHE REGIONS
+jcs.region.JsonDocCache=DC
+jcs.region.JsonDocCache.cacheattributes=org.apache.commons.jcs.engine.CompositeCacheAttributes
+jcs.region.JsonDocCache.cacheattributes.MaxObjects=1000
+jcs.region.JsonDocCache.cacheattributes.MemoryCacheName=org.apache.commons.jcs.engine.memory.lru.LRUMemoryCache
+jcs.region.JsonDocCache.cacheattributes.UseMemoryShrinker=false
+jcs.region.JsonDocCache.cacheattributes.MaxMemoryIdleTimeSeconds=3600
+jcs.region.JsonDocCache.cacheattributes.ShrinkerIntervalSeconds=60
+jcs.region.JsonDocCache.cacheattributes.MaxSpoolPerRun=500
+jcs.region.JsonDocCache.elementattributes=org.apache.commons.jcs.engine.ElementAttributes
+jcs.region.JsonDocCache.elementattributes.IsEternal=false
+
+# AVAILABLE AUXILIARY CACHES
+jcs.auxiliary.DC=org.apache.commons.jcs.auxiliary.disk.indexed.IndexedDiskCacheFactory
+jcs.auxiliary.DC.attributes=org.apache.commons.jcs.auxiliary.disk.indexed.IndexedDiskCacheAttributes
+jcs.auxiliary.DC.attributes.DiskPath=${user.dir}/jcs_swap
+jcs.auxiliary.DC.attributes.MaxPurgatorySize=10000000
+jcs.auxiliary.DC.attributes.MaxKeySize=1000000
+jcs.auxiliary.DC.attributes.OptimizeAtRemoveCount=300000
+jcs.auxiliary.DC.attributes.ShutdownSpoolTimeLimit=60
