@@ -2,6 +2,8 @@ package com.eprogrammerz.examples.java8.example1v2;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * Created by 542596 on 11/10/2016.
@@ -29,5 +31,9 @@ public class FilteringApp {
         //getting non-empty strings
         List<String> nonEmptyStrings = MyCollections.filterApples(strings,nonEmptyStringPredicate);
         System.out.println(nonEmptyStrings);
+
+        Map<String, String> filteredNames = names.stream().filter(s -> s.length() == 3).collect(Collectors.toMap(name-> name, name-> name));
+        System.out.println(filteredNames);
+        System.out.println(names);
     }
 }

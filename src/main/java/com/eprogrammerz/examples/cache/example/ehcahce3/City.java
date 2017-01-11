@@ -6,6 +6,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.io.Serializable;
+import java.util.Map;
 
 /**
  * Created by 542596 on 12/9/2016.
@@ -18,4 +19,5 @@ public class City implements Serializable {
     public String name;
     public String country;
     public int population;
+    public Map<String, Object> zipCodes;
 }

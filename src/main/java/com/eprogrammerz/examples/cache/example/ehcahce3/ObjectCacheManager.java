@@ -18,14 +18,14 @@ public class ObjectCacheManager {
 
     public ObjectCacheManager() {
         CacheManager cacheManager = CacheManagerBuilder.newCacheManagerBuilder()
-                .withCache("preConfigured",
+                .withCache("myCache",
                         CacheConfigurationBuilder.newCacheConfigurationBuilder(String.class, City.class,
                                 ResourcePoolsBuilder.heap(100)).withValueSerializingCopier()
                                 .build())
                 .build(true);
 
 
-        objectCache  = cacheManager.getCache("preConfigured", String.class, City.class);
+        objectCache  = cacheManager.getCache("myCache", String.class, City.class);
     }
 
     public void putInCache(String key, City value){
