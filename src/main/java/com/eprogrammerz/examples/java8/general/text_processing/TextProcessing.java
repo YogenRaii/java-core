@@ -33,6 +33,7 @@ public class TextProcessing {
 
         System.out.println(brandAndProduct);
 
+        //need to find the texts with image urls ex. /path/to/image.jpg, /path/to/image1.jpg etc
 //        Pattern pattern = Pattern.compile("(/.*\\.(?:png|jpg))", CASE_INSENSITIVE);
         Pattern pattern = Pattern.compile("(?:/[^/#?]+)+\\.(?:jpg|gif|png)", CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(brandAndProduct.toString());
