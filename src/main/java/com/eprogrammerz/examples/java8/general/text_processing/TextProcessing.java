@@ -24,22 +24,28 @@ public class TextProcessing {
         productLinks.put("image2", "/path/to/image1.jpg");
         productLinks.put("image3", "/path/to/image2.jpg");
         productLinks.put("image4", "/path/to/image3.jpg");
+        productLinks.put("image5", "/path/to/image3.png");
         Product product = new Product("NewProduct", productLinks);
         brandAndProduct.setBrand(brand);
         brandAndProduct.setProducts(Arrays.asList(product));
     }
 
     public static void main(String[] args) {
+        //to verify String is immutable
+//        String string = "Delta offered solution, not obstruction, for Qatar inaugural gate access";
+//        String newString = string.replace("access", "great access");
+//        System.out.println(string);
+//        System.out.println(newString);
 
+//need to find the texts with image urls ex. /path/to/image.jpg, /path/to/image1.jpg etc
         System.out.println(brandAndProduct);
-
-        //need to find the texts with image urls ex. /path/to/image.jpg, /path/to/image1.jpg etc
-//        Pattern pattern = Pattern.compile("(/.*\\.(?:png|jpg))", CASE_INSENSITIVE);
-        Pattern pattern = Pattern.compile("(?:/[^/#?]+)+\\.(?:jpg|gif|png)", CASE_INSENSITIVE);
-        Matcher matcher = pattern.matcher(brandAndProduct.toString());
-        if(matcher.find()){
-            System.out.println("Matched....");
-            System.out.println(matcher.group());
+        String brandAndProductString = brandAndProduct.toString();
+        Pattern pattern = Pattern.compile("([^=.*]+\\.(?:jpg|png))", CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(brandAndProductString);
+        String result = null;
+        while (matcher.find()){
+            result = brandAndProductString.replaceAll("([^=.*]+\\.(?:jpg|png))", "delta.com"+matcher.group());
         }
+        System.out.println(result);
     }
 }
