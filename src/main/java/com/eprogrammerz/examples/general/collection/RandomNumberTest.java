@@ -1,4 +1,4 @@
-package com.eprogrammerz.examples.java8.general;
+package com.eprogrammerz.examples.general.collection;
 
 /**
  * Created by 542596 on 11/17/2016.

@@ -1,4 +1,4 @@
-package com.eprogrammerz.examples.java8.general;
+package com.eprogrammerz.examples.general.collection;
 
 import java.util.HashMap;
 

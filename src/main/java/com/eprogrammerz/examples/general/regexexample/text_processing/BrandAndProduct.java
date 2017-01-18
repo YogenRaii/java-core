@@ -1,4 +1,4 @@
-package com.eprogrammerz.examples.java8.general.text_processing;
+package com.eprogrammerz.examples.general.regexexample.text_processing;
 
 import lombok.Getter;
 import lombok.Setter;
