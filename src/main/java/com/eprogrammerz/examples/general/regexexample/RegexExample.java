@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * Created by 542596 on 12/8/2016.
@@ -27,6 +28,12 @@ public class RegexExample {
         System.out.println(typeSubtypeId[0] + typeSubtypeId[1]);
 
         String[] splitted = "all-meal".split("\\.");
-        System.out.println(splitted[1]);
+        System.out.println(splitted[0]);
+
+        String newAwesomeString = "a, b,c, d";
+        List<String> splittedString = Arrays.asList(newAwesomeString.split(","));
+        System.out.println(splittedString);
+        List<String> trimmed = splittedString.stream().map(s -> s.trim()).collect(Collectors.toList());
+        System.out.println(trimmed);
     }
 }

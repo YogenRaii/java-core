@@ -28,6 +28,25 @@ public class ObjectCacheManager {
         objectCache  = cacheManager.getCache("myCache", String.class, City.class);
     }
 
+    /*//setting up cache
+    @PostConstruct
+    public void setUp(){
+        CacheManager cacheManager = CacheManagerBuilder.newCacheManagerBuilder()
+//                .with(new CacheManagerPersistenceConfiguration(new File(getCacheStoragePath(), "cachedData")))
+                .withCache("jsonCache",
+                        CacheConfigurationBuilder.newCacheConfigurationBuilder(String.class, JsonObjectWrapper.class,
+                                ResourcePoolsBuilder.newResourcePoolsBuilder()
+                                        .heap(20, EntryUnit.ENTRIES)
+                                        .offheap(10, MemoryUnit.MB))
+//                                        .disk(20L, MemoryUnit.MB))
+                                .withExpiry(Expirations.timeToLiveExpiration(Duration.INFINITE))
+                                .withValueSerializingCopier()
+                                .build())
+                .build(true);
+
+        this.objectCache = cacheManager.getCache("jsonCache", String.class, JsonObjectWrapper.class);
+    }*/
+
     public void putInCache(String key, City value){
         try{
             objectCache.put(key, value);

@@ -1,7 +1,6 @@
 package com.eprogrammerz.examples.java8.features;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -18,6 +17,26 @@ public class StreamExample {
 
         int emptyStringCount = (int)strings.stream().filter(string -> string.trim().isEmpty()).count();
         System.out.println("Empty Strings: "+emptyStringCount);
+        /*
+        //This causes NullPointerException
+        List<Object> nullList = null;
+        nullList.stream().findFirst().get();
+        */
 
+        Optional<String> stringOptional = strings.stream().filter(s -> s.length() == 9).findFirst();
+        System.out.println(stringOptional);
+
+        Map<String, Object> sampleMap = new HashMap<>();
+        String value = (String) sampleMap.get("name");
+        System.out.println(value);
+
+        List<String> stringList = new ArrayList<>();
+        stringList.add("ogen");
+        stringList.add(0, "Rai");
+        System.out.println(stringList);
+        String valueRemvoed = stringList.remove(0);
+        System.out.println(valueRemvoed);
+        stringList.add(0,"Yogen");
+        System.out.println(stringList);
     }
 }

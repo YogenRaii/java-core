@@ -36,3 +36,7 @@ bin
 .vagrant
 .docker
 *.retry
+
+
+# Cache
+jcs_swap
