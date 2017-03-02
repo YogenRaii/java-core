@@ -14,6 +14,10 @@ import static org.hamcrest.core.IsEqual.equalTo;
 
 /**
  * Created by 542596 on 3/1/2017.
+ *
+ * TDD -> high code coverage and fast feedback
+ * BDD -> automated acceptance test
+ * Combine -> when[ACTION]then[IMPL]
  */
 @RunWith(MockitoJUnitRunner.class)
 public class DateManipulatorTest {
@@ -31,7 +35,7 @@ public class DateManipulatorTest {
     }
 
     @Test
-    public void getTodaySchedule() throws Exception {
+    public void whenGetTodayScheduleThenReturnScheduleOfToday() throws Exception {
         Calendar calendar = Mockito.mock(Calendar.class);
         classUnderTest.setCalendar(calendar);
         Mockito.when(calendar.get(Calendar.DAY_OF_WEEK)).thenReturn(3);
