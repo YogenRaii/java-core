@@ -8,4 +8,8 @@ public class Child extends Parent {
     public void parentMethod() {
         System.out.println("Parent Overriden...");
     }
+
+    public final void finalMethod() {
+        Thread thread= new Thread();
+    }
 }

@@ -9,4 +9,8 @@ public class Parent {
     public void parentMethod() throws IOException {
         System.out.println("In Parent...");
     }
+
+    public void finalMethod() {
+
+    }
 }
