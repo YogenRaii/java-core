@@ -99,6 +99,20 @@
             <version>1.1.1</version>
         </dependency>
 
-
+        <!--jdbc mssql-->
+        <!-- https://mvnrepository.com/artifact/com.microsoft/sqljdbc4 -->
+        <dependency>
+            <groupId>com.microsoft</groupId>
+            <artifactId>sqljdbc4</artifactId>
+            <version>3.0</version>
+        </dependency>
     </dependencies>
+
+    <repositories>
+        <repository>
+            <id>Clojars</id>
+            <name>your custom repo</name>
+            <url>http://clojars.org/repo/</url>
+        </repository>
+    </repositories>
 </project>
