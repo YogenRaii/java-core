@@ -21,7 +21,7 @@ public class DeepCloneExample {
 		log.info(dogs.toString());
 		
 		//clone with java 8
-		List<Dog> clonedList = dogs.stream().collect(Collectors.toList());
+		List<Dog> clonedList = dogs.stream().map(Dog::new).collect(Collectors.toList());
 		log.info(clonedList.toString());
 		
 		clonedList.add(new Dog("New", 3));
@@ -30,10 +30,14 @@ public class DeepCloneExample {
 		log.info(dogs.toString());
 		log.info(clonedList.toString());
 		
+		dog2.setName("Very New Name");
+		log.info(dogs.toString());
+		log.info(clonedList.toString());		
+		
 		//with normal 
 		//copy all the items in the list to new list
-		//but, the items in the collection need to implement Clonable interface
-		//meaning Object on list must be clonable
+		//but, the items in the collection need to implement Cloneable interface
+		//meaning Object on list must be cloneable
 	}
 
 }
@@ -41,11 +45,23 @@ public class DeepCloneExample {
 class Dog {
 	private String name;
 	private int age;
+	
 	public Dog(String name, int age) {
 		super();
 		this.name = name;
 		this.age = age;
 	}
+	
+	//copy constructor to create the copy of the Dog object
+	public Dog(Dog dog) {
+		this.name = dog.name;
+		this.age = dog.age;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
+	}
+	
 	public String getName() {
 		return name;
 	}
