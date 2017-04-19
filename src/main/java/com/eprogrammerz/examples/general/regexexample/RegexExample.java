@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 /**
@@ -35,5 +37,9 @@ public class RegexExample {
         System.out.println(splittedString);
         List<String> trimmed = splittedString.stream().map(s -> s.trim()).collect(Collectors.toList());
         System.out.println(trimmed);
+        
+        System.out.println("1234".matches("[1-9]\\d{4}"));
+        System.out.println("12354".matches("[1-9]\\d{4}"));
+        System.out.println("01234".matches("[1-9]\\d{4}"));
     }
 }
