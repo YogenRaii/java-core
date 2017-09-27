@@ -8,6 +8,13 @@ public class FinllayExample {
         System.out.println("Before call...");
         exceptionThrowingMethod();
         System.out.println("After thrown...");
+        /*
+        output will be:
+        Before call...
+        java.lang.ArithmeticException: / by zero
+        finally
+        After thrown...
+        */
     }
 
     public static void exceptionThrowingMethod() {

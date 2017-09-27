@@ -2,7 +2,6 @@ package com.eprogrammerz.examples.cache.example.cloning;
 
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by 542596 on 12/21/2016.
@@ -21,7 +20,8 @@ public class HashMapClone {
 
         System.out.println("Changing value...");
         map.remove("key1");
-        map = clonedMap;
+
+        //removing from map doesn't affect cloneMap
         System.out.println(map);
         System.out.println(clonedMap);
 

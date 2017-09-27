@@ -7,10 +7,10 @@ public class InheritanceFragality {
 
     public static void main(String[] args) {
         Square square = new Square(5);
-        System.out.println(square.calculateArea());
+        System.out.println(square.calculateArea());  //25
 
         square.setBreadth(9);
-        System.out.println(square.calculateArea());
+        System.out.println(square.calculateArea());   //45 which is not correct for square
     }
 }
 

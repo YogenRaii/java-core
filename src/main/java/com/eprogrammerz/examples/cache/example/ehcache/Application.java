@@ -17,6 +17,7 @@ public class Application {
         final City city1 = new City("ATL","USA",12100);
         final City city2 = new City("FL","USA",12000);
 
+        //with HashMap initialization, immutable instance is created because of which exception occurs
        /* manager.putInCache(city1.getName(), new HashMap(){
             {
                 put("city1", city1);

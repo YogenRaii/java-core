@@ -23,7 +23,8 @@ public class MostFrequentElement {
 				elemFreq.put(e, 1);
 			}
 		}
-		
+
+		//prints elements in ordering of keys
 		System.out.println(elemFreq);
 	}
 }

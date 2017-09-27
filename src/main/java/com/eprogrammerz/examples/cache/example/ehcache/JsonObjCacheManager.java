@@ -55,8 +55,6 @@ public class JsonObjCacheManager {
     }
 
     public Object retrieveFromCache(String key){
-//        System.out.println("+++++++++++");
-//        System.out.println(objectCache.getKeys());
         try {
             Element element = objectCache.get(key);
             if(element != null)
