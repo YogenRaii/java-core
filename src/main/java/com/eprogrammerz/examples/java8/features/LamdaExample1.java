@@ -6,7 +6,7 @@ package com.eprogrammerz.examples.java8.features;
  * Lambda expressions -> inline implementation of functional interface
  *                    -> eliminates the need of anonymous class
  */
-public class LamdaExamples {
+public class LamdaExample1 {
 
     private final static String salutation = "Hello! ";
 
