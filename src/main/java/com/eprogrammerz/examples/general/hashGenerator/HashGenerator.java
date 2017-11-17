@@ -11,7 +11,6 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Arrays;
 import java.util.Formatter;
 
 import static org.junit.Assert.assertEquals;
@@ -23,9 +22,9 @@ public class HashGenerator {
 
     @Test
     public void testHashGenerators() throws IOException, NoSuchAlgorithmException {
-        File input = new File("/Users/yrai/Downloads/E.tif");
-
-//        String defHashValue = getHashWithByteBuffer(input);
+//        File input = new File("/Users/yrai/Downloads/E.tif");
+        ClassLoader classLoader = getClass().getClassLoader();
+        File input = new File(classLoader.getResource("random-pic.jpg").getFile());
 
         long startTime = System.currentTimeMillis();
         String handBufHashValue = getImageHashValue(input);
