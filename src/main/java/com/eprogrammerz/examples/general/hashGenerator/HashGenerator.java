@@ -22,23 +22,23 @@ public class HashGenerator {
 
     @Test
     public void testHashGenerators() throws IOException, NoSuchAlgorithmException {
-//        File input = new File("/Users/yrai/Downloads/E.tif");
-        ClassLoader classLoader = getClass().getClassLoader();
-        File input = new File(classLoader.getResource("random-pic.jpg").getFile());
+        File input = new File("/Users/yrai/Downloads/E.tif");
+//        ClassLoader classLoader = getClass().getClassLoader();
+//        File input = new File(classLoader.getResource("random-pic.jpg").getFile());
 
         long startTime = System.currentTimeMillis();
         String handBufHashValue = getImageHashValue(input);
         long completeTime = System.currentTimeMillis();
-        System.out.println(completeTime - startTime);
+        log.info("Custom buffer: {} ns", completeTime - startTime);
 
         startTime = System.currentTimeMillis();
         String hashValueWithCopy = getImageHashValueWithCopy(input);
         completeTime = System.currentTimeMillis();
-        System.out.println(completeTime - startTime);
+        log.info("Guava: {} ns", completeTime - startTime);
 
         assertEquals(handBufHashValue, hashValueWithCopy);
 
-        getHashWithByteBuffer(input);
+//        getHashWithByteBuffer(input);
     }
 
     public static String getImageHashValue(File input) throws IOException, NoSuchAlgorithmException {
