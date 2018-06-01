@@ -1,7 +1,12 @@
 package com.eprogrammerz.examples.java8.features;
 
-import java.util.*;
+import org.junit.Test;
+
+import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
+
+import static junit.framework.TestCase.*;
 
 /**
  * Created by 542596 on 11/9/2016.
@@ -10,33 +15,27 @@ import java.util.stream.Collectors;
  * any specific code for it.
  */
 public class StreamExample {
-    public static void main(String[] args) {
+    public List<String> filterEmptyStrings(final List<String> originalList) {
+        return originalList.stream().filter(str -> !str.trim().isEmpty()).collect(Collectors.toList());
+    }
+
+    public String concateNonEmptyString(final List<String> originalList, String delimiter) {
+        final List<String> filterd = filterEmptyStrings(originalList);
+        return filterd.stream().collect(Collectors.joining(delimiter));
+    }
+
+    @Test
+    public void filterEmptyStringsReturnsOnlyNonEmptyStrings() {
         List<String> strings = Arrays.asList("abc"," ","bc","delta"," ","yogen");
-        List<String> filtered = strings.stream().filter(string -> !string.trim().isEmpty()).collect(Collectors.toList());
-        filtered.forEach(System.out::println);
+        List<String> filtered = filterEmptyStrings(strings);
+        filtered.forEach(str -> assertFalse(str.isEmpty()));
+        assertTrue(filtered.size() == 4);
+    }
 
-        int emptyStringCount = (int)strings.stream().filter(string -> string.trim().isEmpty()).count();
-        System.out.println("Empty Strings: "+emptyStringCount);
-        /*
-        //This causes NullPointerException
-        List<Object> nullList = null;
-        nullList.stream().findFirst().get();
-        */
-
-        Optional<String> stringOptional = strings.stream().filter(s -> s.length() == 9).findFirst();
-        System.out.println(stringOptional);
-
-        Map<String, Object> sampleMap = new HashMap<>();
-        String value = (String) sampleMap.get("name");
-        System.out.println(value);
-
-        List<String> stringList = new ArrayList<>();
-        stringList.add("ogen");
-        stringList.add(0, "Rai");
-        System.out.println(stringList);
-        String valueRemvoed = stringList.remove(0);
-        System.out.println(valueRemvoed);
-        stringList.add(0,"Yogen");
-        System.out.println(stringList);
+    @Test
+    public void concateNonEmptyStringReturnsStringConcatenatedWithGivenDelimiter() {
+        List<String> strings = Arrays.asList("abc"," ","bc","delta"," ","yogen");
+        assertEquals("abc,bc,delta,yogen", concateNonEmptyString(strings, ","));
+        assertEquals("abc:bc:delta:yogen", concateNonEmptyString(strings, ":"));
     }
 }
