@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 import static junit.framework.TestCase.*;
 
 /**
- * Created by 542596 on 11/9/2016.
+ * Created by Yogen on 11/9/2016.
  *
  * Stream lets developer to process data declaratively and leverage multicore architecture without the need to write
  * any specific code for it.
@@ -22,6 +22,11 @@ public class StreamExample {
     public String concateNonEmptyString(final List<String> originalList, String delimiter) {
         final List<String> filterd = filterEmptyStrings(originalList);
         return filterd.stream().collect(Collectors.joining(delimiter));
+    }
+
+    public String concateNonEmptyStringV2(final List<String> originalList, String delimiter) {
+        final List<String> filterd = filterEmptyStrings(originalList);
+        return String.join(delimiter, filterd);
     }
 
     @Test
@@ -37,5 +42,8 @@ public class StreamExample {
         List<String> strings = Arrays.asList("abc"," ","bc","delta"," ","yogen");
         assertEquals("abc,bc,delta,yogen", concateNonEmptyString(strings, ","));
         assertEquals("abc:bc:delta:yogen", concateNonEmptyString(strings, ":"));
+
+        assertEquals("abc,bc,delta,yogen", concateNonEmptyStringV2(strings, ","));
+        assertEquals("abc:bc:delta:yogen", concateNonEmptyStringV2(strings, ":"));
     }
 }
