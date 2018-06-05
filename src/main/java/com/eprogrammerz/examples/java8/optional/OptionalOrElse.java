@@ -64,21 +64,4 @@ public class OptionalOrElse {
         assertEquals("Yogen", pickLuckyNameWOrElse(NAMES, "Y"));
         assertEquals("No lucky name found", pickLuckyNameWOrElse(NAMES, "Q"));
     }
-
-/*
-    public Integer sum(Optional<Integer> num1, Optional<Integer> num2) {
-        Integer val1 = num1.orElse(new Integer(0));
-        Integer val2 = num2.orElse(new Integer(0)); // num2.get();
-        return val1 + val2;
-    }
-
-    @Test
-    public void testSumWithOptionals() {
-        //Optional.ofNullable - allows null to be a parameter
-        Optional<Integer> num1 = Optional.ofNullable(null);
-
-        Optional<Integer> num2 = Optional.of(new Integer(10));
-
-        assertEquals(new Integer(10), sum(num1, num2));
-    }*/
 }
