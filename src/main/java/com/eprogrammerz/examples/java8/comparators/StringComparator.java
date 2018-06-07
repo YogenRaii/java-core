@@ -5,6 +5,7 @@ import org.junit.Test;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.function.Function;
 
 import static org.junit.Assert.assertEquals;
 
@@ -14,6 +15,12 @@ import static org.junit.Assert.assertEquals;
 public class StringComparator {
     public void sortNewWay(final List<String> words) {
         words.sort(Comparator.comparing(String::length)
+                .thenComparing(Comparator.reverseOrder()).reversed());
+    }
+
+    public void sortNewWayIntuitive(final List<String> words) {
+        final Function<String, Integer> byLength = s -> s.length();
+        words.sort(Comparator.comparing(byLength)
                 .thenComparing(Comparator.reverseOrder()).reversed());
     }
 

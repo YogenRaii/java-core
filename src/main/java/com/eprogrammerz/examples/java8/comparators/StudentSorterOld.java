@@ -17,9 +17,14 @@ public class StudentSorterOld {
     public void sort(final List<Student> students, final SORT_METHOD method) {
         Collections.sort(students, (s1, s2) -> {
             if (SORT_METHOD.BYNAME == method) {
-                return s1.getName().compareToIgnoreCase(s2.getName());
+                if(s1.getName().compareTo(s2.getName()) == 0) {
+                    if (s1.getAge() == s2.getAge()) return 0;
+                    else if (s1.getAge() < s2.getAge()) return -1;
+                    else return 1;
+                }
+                return s1.getName().compareTo(s2.getName());
             } else {
-                if (s1.getAge() == s2.getAge()) return 0;
+                if (s1.getAge() == s2.getAge()) return s1.getName().compareTo(s2.getName());
                 else if (s1.getAge() < s2.getAge()) return -1;
                 else return 1;
             }
@@ -33,7 +38,9 @@ public class StudentSorterOld {
         sort(students, SORT_METHOD.BYNAME);
 
         assertEquals(new Student("Pratima", 25), students.get(0));
-        assertEquals(new Student("Yogen", 23), students.get(1));
+        assertEquals(new Student("Reeta", 25), students.get(1));
+        assertEquals(new Student("Yogen", 21), students.get(2));
+        assertEquals(new Student("Yogen", 23), students.get(3));
     }
 
     @Test
@@ -42,15 +49,18 @@ public class StudentSorterOld {
 
         sort(students, SORT_METHOD.BYAGE);
 
-        assertEquals(new Student("Yogesh", 21), students.get(0));
+        assertEquals(new Student("Yogen", 21), students.get(0));
         assertEquals(new Student("Yogen", 23), students.get(1));
+        assertEquals(new Student("Pratima", 25), students.get(2));
+        assertEquals(new Student("Reeta", 25), students.get(3));
     }
 
     public List<Student> getStudents() {
         final List<Student> students = new ArrayList<>();
         students.add(new Student("Yogen", 23));
+        students.add(new Student("Reeta", 25));
         students.add(new Student("Pratima", 25));
-        students.add(new Student("Yogesh", 21));
+        students.add(new Student("Yogen", 21));
         return students;
     }
 }
