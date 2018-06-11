@@ -44,6 +44,15 @@ public class MyMap<K, V> {
     }
 
     public V get(K key) {
+        int keyHash = getHash(key);
+        Entry<K, V> bucket = buckets[keyHash % getBucketSize()];
+
+        while (bucket.next != null) {
+            if (key == bucket.key) {
+                return bucket.value;
+            }
+            bucket = bucket.next;
+        }
         return null;
     }
 

@@ -16,5 +16,8 @@ public class Validator {
         myMap.put("Jan", "Jan");
 
         System.out.println(myMap);
+
+        System.out.println(myMap.get("yogen"));
+        System.out.println(myMap.get("Yogen"));
     }
 }
