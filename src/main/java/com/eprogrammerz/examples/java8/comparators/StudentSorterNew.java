@@ -14,7 +14,7 @@ public class StudentSorterNew {
     public enum SORT_METHOD {BYNAME, BYAGE}
 
     Function<Student, String> byName = e -> e.getName();
-    Function<Student, Double> byAge = e -> e.getAge();
+    Function<Student, Float> byAge = e -> e.getAge();
 
     public void sort(final List<Student> students, final SORT_METHOD method) {
         if (SORT_METHOD.BYNAME == method) {

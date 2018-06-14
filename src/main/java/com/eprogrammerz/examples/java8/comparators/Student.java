@@ -5,9 +5,9 @@ package com.eprogrammerz.examples.java8.comparators;
  */
 public class Student {
     private String name;
-    private double age;
+    private float age;
 
-    public Student(String name, double age) {
+    public Student(String name, float age) {
         this.name = name;
         this.age = age;
     }
@@ -16,7 +16,7 @@ public class Student {
         return name;
     }
 
-    public double getAge() {
+    public float getAge() {
         return age;
     }
 
