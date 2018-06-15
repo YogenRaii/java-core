@@ -1,4 +1,4 @@
-package com.eprogrammerz.examples.java8.features;
+package com.eprogrammerz.examples.java8.lambda;
 
 /**
  * Created by 542596 on 11/9/2016.
@@ -6,13 +6,15 @@ package com.eprogrammerz.examples.java8.features;
  * Lambda expressions -> inline implementation of functional interface
  *                    -> eliminates the need of anonymous class
  */
-public class LamdaExample1 {
+public class GreetingApp {
 
     private final static String salutation = "Hello! ";
 
     public static void main(String[] args) {
-        GreetingService service = message -> System.out.println(salutation + message);
+        GreetingService<String> service = message -> System.out.println(salutation + message);
         service.sayHello("Yogen");
+
+        // pass lambda as parameter
         lambdaExecutor(service);
     }
 
@@ -31,6 +33,6 @@ public class LamdaExample1 {
  * functional interface
  */
 @FunctionalInterface
-interface GreetingService{
-    void sayHello(String message);
+interface GreetingService<T>{
+    void sayHello(T message);
 }
