@@ -2,8 +2,7 @@ package com.eprogrammerz.examples.java8.stream;
 
 import org.junit.Test;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static junit.framework.TestCase.*;
@@ -45,5 +44,27 @@ public class StreamExample {
 
         assertEquals("abc,bc,delta,yogen", concateNonEmptyStringV2(strings, ","));
         assertEquals("abc:bc:delta:yogen", concateNonEmptyStringV2(strings, ":"));
+    }
+
+    public Map<String, String> sortMapByValue(final Map<String, String> map) {
+        return map.entrySet().stream().sorted((s1, s2) -> s2.getValue().length() - s1.getValue().length())
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
+    }
+
+    @Test
+    public void testSortMapByValue() {
+        Map<String, String> strings = new HashMap<>();
+        strings.put("1", "first");
+        strings.put("2", "second");
+        strings.put("3", "third");
+        strings.put("4", "four");
+
+        Map<String, String> expected = new LinkedHashMap<>();
+        expected.put("2", "second");
+        expected.put("1", "first");
+        expected.put("3", "third");
+        expected.put("4", "four");
+
+        assertEquals(expected, sortMapByValue(strings));
     }
 }
