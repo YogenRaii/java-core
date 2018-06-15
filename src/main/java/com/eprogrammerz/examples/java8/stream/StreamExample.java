@@ -1,4 +1,4 @@
-package com.eprogrammerz.examples.java8.features;
+package com.eprogrammerz.examples.java8.stream;
 
 import org.junit.Test;
 

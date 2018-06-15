@@ -8,6 +8,8 @@ import java.util.Optional;
  * @author Yogen Rai
  *
  * Proper usage of Optional
+ *
+ * https://www.nurkiewicz.com/2013/08/optional-in-java-8-cheat-sheet.html
  */
 public class OptionalIfPresent {
     public static final List<String> NAMES = Arrays.asList("Rita", "Gita", "Nita", "Ritesh", "Nitesh", "Ganesh", "Yogen", "Prateema");
