@@ -14,8 +14,10 @@ import static org.junit.Assert.assertEquals;
  */
 public class StringComparator {
     public void sortNewWay(final List<String> words) {
-        words.sort(Comparator.comparing(String::length)
-                .thenComparing(Comparator.reverseOrder()).reversed());
+        words.sort(Comparator.comparing(String::length).reversed().thenComparing(Comparator.naturalOrder()));
+
+//        words.sort(Comparator.comparing(String::length)
+//                .thenComparing(Comparator.reverseOrder()).reversed());
     }
 
     public void sortNewWayIntuitive(final List<String> words) {
