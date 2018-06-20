@@ -27,6 +27,15 @@ public class LambdaTester {
         } ).toArray(Class[]::new);
     }
 
+    @Test
+    public void testMapClasses() {
+        Class[] expected = new Class[]{null, null, Object.class};
+        List<String> input = Arrays.asList("a", "apple", "java.lang.Object");
+
+        assertArrayEquals(expected, mapClasses(input));
+    }
+
+    // more intuitive version of stream
     public static Class[] mapClassesBetter(final List<String> exceptions) {
         return exceptions.stream().map(LambdaTester::mapClass).toArray(Class[]::new);
     }
@@ -45,14 +54,6 @@ public class LambdaTester {
         assertEquals(null, mapClass("a"));
         assertEquals(null, mapClass("apple"));
         assertEquals(Object.class, mapClass("java.lang.Object"));
-    }
-
-    @Test
-    public void testMapClasses() {
-        Class[] expected = new Class[]{null, null, Object.class};
-        List<String> input = Arrays.asList("a", "apple", "java.lang.Object");
-
-        assertArrayEquals(expected, mapClasses(input));
     }
 
     @Test
