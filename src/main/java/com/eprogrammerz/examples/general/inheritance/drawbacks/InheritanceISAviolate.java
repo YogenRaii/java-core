@@ -3,7 +3,7 @@ package com.eprogrammerz.examples.general.inheritance.drawbacks;
 import java.util.ArrayList;
 
 /**
- * Created by 542596 on 3/2/2017.
+ * Created by Yogen on 3/2/2017.
  */
 public class InheritanceISAviolate {
     public static void main(String[] args) {
