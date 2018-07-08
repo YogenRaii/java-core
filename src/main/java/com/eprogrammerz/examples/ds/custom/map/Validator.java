@@ -2,6 +2,10 @@ package com.eprogrammerz.examples.ds.custom.map;
 
 import org.junit.Test;
 
+import static junit.framework.TestCase.assertEquals;
+import static junit.framework.TestCase.assertNotNull;
+import static junit.framework.TestCase.assertNull;
+
 public class Validator {
     @Test
     public void testMyMap() {
@@ -15,9 +19,9 @@ public class Validator {
         myMap.put("dan", "Dan");
         myMap.put("Jan", "Jan");
 
-        System.out.println(myMap);
-
-        System.out.println(myMap.get("yogen"));
-        System.out.println(myMap.get("Yogen"));
+        assertNotNull(myMap);
+        assertNull(myMap.get("Yogen"));
+        assertEquals("Ram", myMap.get("yogen"));
+        assertEquals("Shyam", myMap.get("shyam"));
     }
 }
