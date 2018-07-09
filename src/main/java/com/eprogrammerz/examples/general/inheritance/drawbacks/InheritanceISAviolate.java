@@ -13,8 +13,15 @@ public class InheritanceISAviolate {
     }
 }
 
-class Stack<T> extends ArrayList<T>{
-    private int stackPointer;
-    public void push(T article) {}
-    public T pop() { return null;}
+class Stack<T> extends ArrayList<T> {
+    private int stackPointer = 0;
+
+    public void push(T article) {
+        add(stackPointer, article);
+        stackPointer++;
+    }
+
+    public T pop() {
+        return remove(--stackPointer);
+    }
 }

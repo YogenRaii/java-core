@@ -1,16 +1,22 @@
 package com.eprogrammerz.examples.general.inheritance.drawbacks;
 
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+
 /**
  * Created by Yogen on 3/2/2017.
  */
 public class InheritanceFragality {
 
-    public static void main(String[] args) {
+    @Test
+    public void testSquare() {
         Square square = new Square(5);
-        System.out.println(square.calculateArea());  //25
+        assertEquals("Area of square", 25, square.calculateArea());
 
+        // set breadth of square :(
         square.setBreadth(9);
-        System.out.println(square.calculateArea());   //45 which is not correct for square
+        assertEquals("Area of new square", 81, square.calculateArea());
     }
 }
 
