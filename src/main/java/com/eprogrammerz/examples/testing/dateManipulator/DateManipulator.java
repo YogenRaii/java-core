@@ -1,5 +1,6 @@
-package com.eprogrammerz.examples.testing.junitCalender;
+package com.eprogrammerz.examples.testing.dateManipulator;
 
+import com.eprogrammerz.examples.testing.schedulerService.Schedule;
 import lombok.Setter;
 
 import java.io.Serializable;

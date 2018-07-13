@@ -1,4 +1,4 @@
-package com.eprogrammerz.examples.testing.junitCalender;
+package com.eprogrammerz.examples.testing.schedulerService;
 
 import java.util.Calendar;
 

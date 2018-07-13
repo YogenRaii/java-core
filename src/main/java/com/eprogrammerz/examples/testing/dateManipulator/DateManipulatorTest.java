@@ -1,5 +1,10 @@
-package com.eprogrammerz.examples.testing.junitCalender;
+package com.eprogrammerz.examples.testing.dateManipulator;
 
+/**
+ * @author Yogen Rai
+ */
+
+import com.eprogrammerz.examples.testing.schedulerService.Schedule;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
