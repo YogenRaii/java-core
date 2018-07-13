@@ -1,12 +1,23 @@
 package com.eprogrammerz.examples.algorithm.leetcode;
 
+import org.junit.Test;
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 /**
  * Created by Yogen on 9/28/2017.
  */
 public class Palindrome {
-    public static void main(String[] args) {
-        System.out.println(isPalindrome(-121));
+    @Test
+    public void testIsPalindrome() {
+        assertTrue(isPalindrome(-121));
+        assertTrue(isPalindrome(-1221));
+        assertTrue(isPalindrome(-12321));
+        assertTrue(isPalindrome(12321));
+        assertFalse(isPalindrome(122321));
     }
+
     public static boolean isPalindrome(int x) {
         int originalVal = x;
         int reversedX = 0;

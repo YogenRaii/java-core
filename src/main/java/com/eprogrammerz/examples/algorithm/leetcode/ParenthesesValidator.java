@@ -1,18 +1,26 @@
 package com.eprogrammerz.examples.algorithm.leetcode;
 
+import org.junit.Test;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Created by Yogen on 9/29/2017.
  */
 public class ParenthesesValidator {
-    public static void main(String[] args) {
-        System.out.println(isValid("{]"));
-        System.out.println(isValid("{}[]"));
-        System.out.println(isValid("{([])}"));
+    @Test
+    public void testIsValid() {
+        assertFalse(isValid("{]"));
+        assertTrue(isValid("{}[]"));
+        assertTrue(isValid("{([])}"));
     }
+    
+    
     public static boolean isValid(String s) {
         Map<Character, Character> pairs = new HashMap<Character, Character>() {
             {
@@ -38,6 +46,6 @@ public class ParenthesesValidator {
             }
         }
 
-        return charStack.size() == 0;
+        return charStack.isEmpty();
     }
 }

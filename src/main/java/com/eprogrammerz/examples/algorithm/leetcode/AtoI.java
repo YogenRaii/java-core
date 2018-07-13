@@ -1,5 +1,9 @@
 package com.eprogrammerz.examples.algorithm.leetcode;
 
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+
 /**
  * Created by Yogen on 9/29/2017.
  * <p>
@@ -10,15 +14,6 @@ package com.eprogrammerz.examples.algorithm.leetcode;
  * 1 * 10^2 + 2 * 10^1 + 3 * 10^0
  */
 public class AtoI {
-    public static void main(String[] args) {
-        System.out.println(atoi("123"));
-        //["1","2","3"]
-        //num = 0 + 1 * 10 ^ 2
-        //num = 100 + 2 * 10^1
-
-        System.out.println(itoa(123));
-    }
-
     public static int atoi(String str) {
         if (str == null || str.length() == 0) {
             throw new IllegalArgumentException("String can not be null or empty.");
@@ -42,5 +37,17 @@ public class AtoI {
         }
         return sb.toString();
 //        return sb.reverse().toString();
+    }
+
+    @Test
+    public void testAtoi() {
+        assertEquals(123, atoi("123"));
+        assertEquals(123, atoi("0123"));
+    }
+
+    @Test
+    public void testItoA() {
+        assertEquals("123", itoa(123));
+        assertEquals("1230", itoa(1230));
     }
 }
