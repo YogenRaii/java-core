@@ -1,28 +1,33 @@
 package com.eprogrammerz.examples.algorithm.trees;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import org.hamcrest.CoreMatchers;
+import org.junit.Test;
+
+import java.util.*;
+
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 
 /**
- * Created by 542596 on 3/1/2017.
+ * Created by Yogen on 3/1/2017.
  */
 public class LevelOrderTraversal {
-    public static void main(String[] args) {
+    @Test
+    public void testLevelOrderTraversal() {
         Node root = new Node(1);
-        BinaryTree binaryTree = new BinaryTree(root);
-
         root.left = new Node(2);
         root.right = new Node(3);
         root.left.left = new Node(4);
         root.left.right = new Node(5);
         root.right.right = new Node(6);
 
+        BinaryTree binaryTree = new BinaryTree(root);
         List<Node> levelOrderTraversal = binaryTree.getLevelOrderTraversal();
-        System.out.println(levelOrderTraversal);
+        List<Node> expected = Arrays.asList(new Node(1),
+                new Node(2),new Node(3),new Node(4),new Node(5), new Node(6));
+        assertEquals(expected.toString(), levelOrderTraversal.toString());
     }
-
 }
 
 class BinaryTree {
