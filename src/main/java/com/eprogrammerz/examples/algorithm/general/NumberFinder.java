@@ -1,24 +1,40 @@
 package com.eprogrammerz.examples.algorithm.general;
 
+import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
+/**
+ * return numbers within range (inclusive) if the given digit is there in number
+ *
+ * for example:
+ * input: 3,5,23
+ * output: 13 23
+ */
+
 public class NumberFinder {
-    static String findNumbers(int digit, int start, int end) {
+    public String findNumbers(int digit, int start, int end) {
         if(start > end) {
             int temp = start;
             start = end;
             end = temp;
         }
-        StringBuilder stringBuilder = new StringBuilder("");
+
+        final List<String> result = new ArrayList<>();
 
         for (int i = start; i <=  end; i++) {
             if (contains(i, digit)) {
-                stringBuilder.append(i);
-                stringBuilder.append(" ");
+                result.add(String.valueOf(i));
             }
         }
-        return stringBuilder.toString().trim();
+        return String.join(" ", result);
     }
 
-    static boolean contains(int num, int digit) {
+    private boolean contains(int num, int digit) {
         while (num > 0) {
             int div = num % 10;
             if (digit == div) {
@@ -29,14 +45,13 @@ public class NumberFinder {
         return false;
     }
 
-    public static void main(String[] args) {
-        System.out.println(findNumbers(3, 5,23));
-        System.out.println(findNumbers(3, 23,5));
-        System.out.println(findNumbers(1, 5,23));
-        System.out.println(findNumbers(2, 5,23));
-        System.out.println(findNumbers(9, 5,23));
-        System.out.println(findNumbers(0, 5,7));
-        System.out.println(findNumbers(7, 1,9));
-        System.out.println(findNumbers(7, 9,1));
+    @Test
+    public void testFindNumbers() {
+        assertEquals("13 23", findNumbers(3,5,23));
+        assertEquals("13 23", findNumbers(3,23,5));
+        assertEquals("10 11 12 13 14 15 16 17 18 19 21", findNumbers(1,23,5));
+        assertEquals("12 20 21 22 23", findNumbers(2,5,23));
+        assertEquals("9 19", findNumbers(9, 5, 23));
+        assertTrue(findNumbers(0,5,7).isEmpty());
     }
 }
