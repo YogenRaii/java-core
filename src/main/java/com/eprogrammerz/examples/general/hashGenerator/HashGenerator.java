@@ -22,9 +22,8 @@ public class HashGenerator {
 
     @Test
     public void testHashGenerators() throws IOException, NoSuchAlgorithmException {
-        File input = new File("/Users/yrai/Downloads/E.tif");
-//        ClassLoader classLoader = getClass().getClassLoader();
-//        File input = new File(classLoader.getResource("random-pic.jpg").getFile());
+        ClassLoader classLoader = getClass().getClassLoader();
+        File input = new File(classLoader.getResource("random-pic.jpg").getFile());
 
         long startTime = System.currentTimeMillis();
         String handBufHashValue = getImageHashValue(input);
@@ -37,8 +36,6 @@ public class HashGenerator {
         log.info("Guava: {} ns", completeTime - startTime);
 
         assertEquals(handBufHashValue, hashValueWithCopy);
-
-//        getHashWithByteBuffer(input);
     }
 
     public static String getImageHashValue(File input) throws IOException, NoSuchAlgorithmException {

@@ -2,8 +2,8 @@
 package com.eprogrammerz.examples.general.enums;
 
 public enum FileType {
-    OneByOne("1x1"),
-    TwoByTwo("2x2");
+    ONE_BY_ONE("1x1"),
+    TWO_BY_TWO("2x2");
 
     private final String value;
 

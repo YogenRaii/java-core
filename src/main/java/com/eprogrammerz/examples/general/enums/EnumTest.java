@@ -1,20 +1,18 @@
 package com.eprogrammerz.examples.general.enums;
 
-import java.util.*;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class EnumTest {
-    public static void main(String[] args) {
-        List<FileType> fileTypes = new ArrayList<>();
-        Map<String, Object> maps = new HashMap<>();
-        maps.put("fileTypes", fileTypes);
 
-        System.out.println(maps);
+    @Test
+    public void testFileType() {
+        // return value for enum
+        assertEquals("1x1", FileType.ONE_BY_ONE.getValue());
 
-        List<String> imageTypesStr = Arrays.asList(FileType.OneByOne.getValue());
-
-        maps.put("fileTypes", imageTypesStr);
-
-        System.out.println(maps);
-
+        // return enum for value
+        assertEquals(FileType.ONE_BY_ONE, FileType.forValue("1x1"));
+        assertEquals(FileType.ONE_BY_ONE, FileType.forValue("1X1"));
     }
 }

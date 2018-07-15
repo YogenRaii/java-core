@@ -3,7 +3,7 @@ package com.eprogrammerz.examples.general.exception;
 /**
  * Created by 542596 on 2/23/2017.
  */
-public class FinllayExample {
+public class FinallyExample {
     public static void main(String[] args) {
         System.out.println("Before call...");
         exceptionThrowingMethod();
