@@ -15,7 +15,7 @@ import static org.junit.Assert.assertEquals;
 /**
  * @author Yogen
  */
-public class SortMapByValue {
+public class WordCountSortedByValue {
 
     @Test
     public void testSortByValue() {
