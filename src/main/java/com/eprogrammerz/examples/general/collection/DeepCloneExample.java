@@ -26,6 +26,13 @@ public class DeepCloneExample {
         dogs.add(dog3);
         dogs.add(dog4);
 
+        // copy constructor to deep clone object
+        Dog clonedDog1 = new Dog(dog1);
+        clonedDog1.setName("Juppy");
+
+        assertEquals("Puppy", dog1.getName());
+        assertEquals("Juppy", clonedDog1.getName());
+
         //clone with java 8
         List<Dog> clonedList = dogs.stream().map(Dog::new).collect(Collectors.toList());
 
