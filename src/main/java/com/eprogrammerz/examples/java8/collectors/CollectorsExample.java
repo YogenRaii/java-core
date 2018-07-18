@@ -2,7 +2,6 @@ package com.eprogrammerz.examples.java8.collectors;
 
 import java.text.DecimalFormat;
 import java.util.*;
-import java.util.stream.Collectors;
 
 import static java.util.Comparator.comparingDouble;
 import static java.util.stream.Collectors.*;
