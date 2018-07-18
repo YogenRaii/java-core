@@ -32,13 +32,17 @@ public class CollectorsExample {
         DoubleSummaryStatistics statistics = employees.stream().collect(summarizingDouble(Employee::getSalary));
         System.out.println("Average: " + statistics.getAverage() + ", Total: " + statistics.getSum() + ", Max: " + statistics.getMax() + ", Min: "+ statistics.getMin());
 
+        // calculating max salary
+        Double maxSalary = employees.stream().collect(collectingAndThen(maxBy(comparingDouble(Employee::getSalary)), emp -> emp.get().getSalary()));
+        System.out.println(maxSalary);
+
         // formatting result with collectingAndThen
         String avgSalary = employees.stream()
                 .collect(collectingAndThen(averagingDouble(Employee::getSalary), new DecimalFormat("'$'0.000")::format));
         System.out.println(avgSalary);
 
         // mapping data
-        List<String> employeeNames = employees.stream().collect(mapping(Employee::getName, toList()));
+        List<String> employeeNames = employees.stream().collect(mapping(Employee::getName, toList())); //employees.stream().map(Employee::getName).collect(toList());
         System.out.println(employeeNames);
 
         // collecting data into string
@@ -62,7 +66,7 @@ public class CollectorsExample {
         System.out.println(averageSalaryDeptSorted);
 
         // leveraging multi-core architectures; but return type would be ConcurrentHashMap
-        System.out.println(employees.stream().collect(groupingByConcurrent(Employee::getSalary)));
+        System.out.println(employees.stream().collect(groupingByConcurrent(Employee::getDepartment, counting())));
 
         // finding max
         Optional<Employee> employeeWithMaxSalary = employees.stream().collect(maxBy(comparingDouble(Employee::getSalary)));
