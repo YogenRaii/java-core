@@ -1,4 +1,4 @@
-package com.eprogrammerz.examples.algorithm.general;
+package com.eprogrammerz.examples.algorithm.bitManipulation;
 
 import java.util.Arrays;
 import java.util.List;
@@ -24,5 +24,6 @@ public class LonelyInteger {
 
     public static void main(String[] args) {
         System.out.println(findLonely(Arrays.asList(1,1,2)));
+        System.out.println(findLonely(Arrays.asList(1,1,2,3,2)));
     }
 }
