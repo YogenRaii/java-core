@@ -28,5 +28,7 @@ public class AlternateBitPattern {
 
     public static void main(String[] args) {
         System.out.println(isAlternatePattern(5));
+        System.out.println(isAlternatePattern(8));
+        System.out.println(isAlternatePattern(7));
     }
 }
