@@ -53,14 +53,10 @@ public class TwoSum {
         //store element and its index and if two elements with same value, second will replace first
         Map<Integer, Integer> elems = new HashMap<>();
         for (int i = 0; i < nums.length; i++) {
-            elems.put(nums[i], i);
-        }
-
-        for (int i = 0; i < nums.length; i++) {
-            int pairY = target - nums[i];
-
-            if (elems.containsKey(pairY)) {
-                return new int[]{i, elems.get(pairY)};
+            if (elems.containsKey(target - nums[i])) {
+                return new int[] {elems.get(target - nums[i]), i};
+            } else {
+                elems.put(nums[i], i);
             }
         }
 
