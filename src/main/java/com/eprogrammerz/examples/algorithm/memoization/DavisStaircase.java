@@ -25,9 +25,10 @@ public class DavisStaircase {
     static int countSteps(int n) {
         if (n < 0) return 0;
         if (n == 0) return 1;
-        if (steps[n] != -1) return steps[n];
+        if (steps[n] == -1) {
+            steps[n] = ((int)((countSteps(n - 1) + countSteps(n - 2) + countSteps(n - 3)) % MOD));
+        }
 
-        steps[n] = ((int)((countSteps(n - 1) + countSteps(n - 2) + countSteps(n - 3)) % MOD));
         return steps[n];
     }
 
@@ -41,8 +42,8 @@ public class DavisStaircase {
     }
 
     public static void main(String[] args) {
-        System.out.println(stepPerms(1));
-        System.out.println(stepPerms(3));
-        System.out.println(stepPerms(7));
+        System.out.println(stepPerms(1)); // 1
+        System.out.println(stepPerms(3)); // 4 [[1,1,1],[1,2],[2,1],[3]]
+        System.out.println(stepPerms(7)); // 44
     }
 }

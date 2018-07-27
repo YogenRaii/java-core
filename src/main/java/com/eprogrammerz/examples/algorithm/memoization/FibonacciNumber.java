@@ -12,8 +12,7 @@ import java.util.Arrays;
 public class FibonacciNumber {
     // without memoization
     static int fibonacci(int n) {
-        if (n == 0) return 0;
-        if (n == 1) return 1;
+        if (n == 0 || n == 1) return n;
 
         return fibonacci(n - 1) + fibonacci( n - 2);
     }
@@ -30,12 +29,12 @@ public class FibonacciNumber {
     }
 
     static int fib(int n) {
-        if (n == 0) return 0;
-        if (n == 1) return 1;
+        if (n == 0 || n == 1) return n;
 
-        if (fibs[n] != -1) return fibs[n];
+        if (fibs[n] == -1) {
+            fibs[n] = fib(n - 1) + fib(n - 2);
+        }
 
-        fibs[n] = fib(n - 1) + fib(n - 2);
         return fibs[n];
     }
 
@@ -45,7 +44,7 @@ public class FibonacciNumber {
         System.out.println(fibonacci(20));
 
         long startTime = System.currentTimeMillis();
-        System.out.println(fibonacci(40));
+        System.out.println(fibonacci(45));
         System.out.println("Time taken (w/o memo): " + (System.currentTimeMillis() - startTime) + " ms");
 
         // memoization
@@ -54,7 +53,7 @@ public class FibonacciNumber {
         System.out.println(fibonacciMemo(20));
 
         startTime = System.currentTimeMillis();
-        System.out.println(fibonacciMemo(40));
+        System.out.println(fibonacciMemo(45));
         System.out.println("Time taken (w memo): " + (System.currentTimeMillis() - startTime) + " ms");
     }
 }
