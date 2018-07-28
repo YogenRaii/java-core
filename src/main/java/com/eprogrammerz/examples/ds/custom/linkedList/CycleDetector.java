@@ -27,7 +27,3 @@ public class CycleDetector {
     }
 }
 
-class Node {
-    int data;
-    Node next;
-}
