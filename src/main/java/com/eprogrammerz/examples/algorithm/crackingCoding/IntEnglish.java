@@ -58,27 +58,33 @@ public class IntEnglish {
 
         for (int i = 0; n != 0; i++) {
             int digit = n % 10;
+            n = n / 10;
             int posVal = (int) Math.pow(10, i);
             if (posVal >= 100) {
-                if (digit != 0) {
+                int twoDigit = (n % 10) * 10 + digit;
+
+                String twoDigitStr = UPTO_NINETY.get(twoDigit);
+
+                if (twoDigitStr != null) {
+                    n = n / 10;
+                    strings.add(0, twoDigitStr);
+                } else {
                     strings.add(0, UPTO_NINETY.get(digit));
-                    strings.add(1, HUNDREDS.get(posVal));
                 }
+                strings.add(1, HUNDREDS.get(posVal));
             } else {
                 strings.add(0, UPTO_NINETY.get(digit * posVal));
             }
-            n = n / 10;
         }
         return String.join(" ", strings);
     }
 
     @Test
     public void testMapIntToString() {
+        assertEquals("Twelve Thousand Three Hundred Forty Five", mapIntToString(12345));
         assertEquals("One Hundred Twenty Four", mapIntToString(124));
         assertEquals("One Hundred Forty Four", mapIntToString(144));
-        assertEquals("One Thousand One Hundred Twenty Four", mapIntToString(1124));
+        assertEquals("Eleven Hundred Twenty Four", mapIntToString(1124));
         assertEquals("Nine Thousand Two Hundred Twenty Four", mapIntToString(9224));
-        assertEquals("Two Million One Thousand Two Hundred Twenty Four", mapIntToString(201224));
-        assertEquals("Two Million One Thousand Twenty Four", mapIntToString(201024));
     }
 }
