@@ -37,13 +37,19 @@ public class DirectedGraph {
         return false;
     }
 
-    public void isRouteBetween(Node start, Node end, List<Node> route) {
-        start.visited = true;
+    public List<Node> findRoute(Node start, Node end) {
+        List<Node> tempRoute = new ArrayList<>();
+        List<Node> route = new ArrayList<>();
+        dfs(start,end, tempRoute, route);
+        return route;
+    }
 
-        System.out.println(start.id + " ");
+    public void dfs(Node start, Node end, List<Node> tempRoute, List<Node> route) {
+        start.visited = true;
+        tempRoute.add(start);
+
         if (start.id == end.id) {
-            route.add(start);
-            return;
+            route.addAll(tempRoute);
         }
 
         List<Node> connections = start.connections;
@@ -51,7 +57,8 @@ public class DirectedGraph {
         if (connections != null) {
             for (Node connection: connections) {
                 if (!connection.visited) {
-                    isRouteBetween(connection, end);
+                    dfs(connection, end, tempRoute, route);
+                    tempRoute.remove(tempRoute.size()-1);
                 }
             }
         }

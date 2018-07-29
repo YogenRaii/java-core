@@ -10,11 +10,14 @@ public class TestUndirectedGraph {
     @Test
     public void testBFS() {
         /**
-         *          1       2       3
-         *            \    /       /
-         *              4         5
-         *                \    /
+         *
+         * /**
          *                  6
+         *                /   \
+         *               4     5
+         *             /  \     \
+         *            1    2    3
+         *
          */
         UndirectedGraph graph = new UndirectedGraph();
         Node a = new Node(1);
