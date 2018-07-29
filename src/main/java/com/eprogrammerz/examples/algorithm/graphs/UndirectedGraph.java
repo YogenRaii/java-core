@@ -2,21 +2,11 @@ package com.eprogrammerz.examples.algorithm.graphs;
 
 import java.util.*;
 
-class Node {
-    int id;
-    List<Node> connections;
-    boolean visited;
-
-    public Node(int id) {
-        this.id = id;
-    }
-}
-
-public class Graph {
+public class UndirectedGraph {
 
     private List<Node> nodes;
 
-    public Graph() {
+    public UndirectedGraph() {
         this.nodes = new ArrayList<>();
     }
 
