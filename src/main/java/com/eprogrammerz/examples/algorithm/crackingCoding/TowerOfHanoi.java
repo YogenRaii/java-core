@@ -33,10 +33,10 @@ public class TowerOfHanoi {
         origin.push(2);
         origin.push(1);
 
-        System.out.println(origin);
+        System.out.println(origin);  // [4, 3, 2, 1]
 
         moveDisks(4, origin, target, buffer);
 
-        System.out.println(target);
+        System.out.println(target);  // [4, 3, 2, 1]
     }
 }

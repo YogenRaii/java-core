@@ -12,10 +12,10 @@ public class Validator {
     @Test
     public void testMyQueue() {
         MyQueue<Integer> queue = new MyQueue<>();
-        queue.add(4);
-        queue.add(9);
-        queue.add(13);
-        queue.add(18);
+        queue.enqueue(4);
+        queue.enqueue(9);
+        queue.enqueue(13);
+        queue.enqueue(18);
 
         assertFalse(queue.isEmpty());
 
@@ -24,7 +24,7 @@ public class Validator {
         assertEquals(Integer.valueOf(4), queue.peek());
 
         // remove
-        assertEquals(Integer.valueOf(4), queue.remove());
+        assertEquals(Integer.valueOf(4), queue.dequeue());
         assertEquals(Integer.valueOf(9), queue.peek());
         assertFalse(queue.isEmpty());
     }
