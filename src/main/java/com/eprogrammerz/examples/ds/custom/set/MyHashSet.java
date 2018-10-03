@@ -30,7 +30,7 @@ import java.util.NoSuchElementException;
  */
 public class MyHashSet<T> {
 
-    private static final Integer INITIAL_CAPACITY = 16;
+    private static final Integer INITIAL_CAPACITY = 1 << 4; // 16
 
     private Node<T>[] buckets;
 

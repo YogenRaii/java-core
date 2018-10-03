@@ -9,19 +9,15 @@ import static junit.framework.TestCase.assertNull;
 public class Validator {
     @Test
     public void testMyMap() {
-        MyMap<String, Object> myMap = new MyMap();
-        myMap.put("yogen", "Yogen");
-        myMap.put("yogen", "Ram");
-        myMap.put("rita", "Rita");
-        myMap.put("gita", "Gita");
-        myMap.put("shyam", "Shyam");
-        myMap.put("man", "Man");
-        myMap.put("dan", "Dan");
-        myMap.put("Jan", "Jan");
+        MyMap<String, String> myMap = new MyMap<>();
+        myMap.put("USA", "Washington DC");
+        myMap.put("Nepal", "Kathmandu");
+        myMap.put("India", "New Delhi");
+        myMap.put("Australia", "Sydney");
 
         assertNotNull(myMap);
-        assertNull(myMap.get("Yogen"));
-        assertEquals("Ram", myMap.get("yogen"));
-        assertEquals("Shyam", myMap.get("shyam"));
+        assertEquals(4, myMap.size());
+        assertEquals("Kathmandu", myMap.get("Nepal"));
+        assertEquals("Sydney", myMap.get("Australia"));
     }
 }

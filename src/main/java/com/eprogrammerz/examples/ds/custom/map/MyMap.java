@@ -1,22 +1,28 @@
 package com.eprogrammerz.examples.ds.custom.map;
 
 public class MyMap<K, V> {
-    private Entry<K,V>[] buckets;
-    private int capacity = 2;
+    private Entry<K, V>[] buckets;
+    private static final int INITIAL_CAPACITY = 1 << 4; // 16
+
+    private int size = 0;
 
     public MyMap() {
+        this(INITIAL_CAPACITY);
+    }
+
+    public MyMap(int capacity) {
         this.buckets = new Entry[capacity];
     }
 
     public void put(K key, V value) {
-        int hash = getHash(key);
-        Entry<K, V> entry = new Entry<>(hash, key, value, null);
+        Entry<K, V> entry = new Entry<>(key, value, null);
 
-        int bucket = hash % getBucketSize();
+        int bucket = getHash(key) % getBucketSize();
 
         Entry<K, V> existing = buckets[bucket];
         if (existing == null) {
             buckets[bucket] = entry;
+            size++;
         } else {
             // compare the keys see if key already exists
             while (existing.next != null) {
@@ -31,23 +37,15 @@ public class MyMap<K, V> {
                 existing.value = value;
             } else {
                 existing.next = entry;
+                size++;
             }
         }
     }
 
-    private int getBucketSize() {
-        return capacity;
-    }
-
-    private int getHash(K key) {
-        return key == null ? 0 : key.hashCode();
-    }
-
     public V get(K key) {
-        int keyHash = getHash(key);
-        Entry<K, V> bucket = buckets[keyHash % getBucketSize()];
+        Entry<K, V> bucket = buckets[getHash(key) % getBucketSize()];
 
-        while (bucket.next != null) {
+        while (bucket != null) {
             if (key == bucket.key) {
                 return bucket.value;
             }
@@ -56,53 +54,22 @@ public class MyMap<K, V> {
         return null;
     }
 
-    static class Entry<K, V> {
-        final int hash;
-        final K key;
-        V value;
-        Entry<K,V> next;
+    public int size() {
+        return size;
+    }
 
-        public Entry(int hash, K key, V value, Entry<K, V> next) {
-            this.hash = hash;
-            this.key = key;
-            this.value = value;
-            this.next = next;
-        }
+    private int getBucketSize() {
+        return buckets.length;
+    }
 
-        public int getHash() {
-            return hash;
-        }
-
-        public K getKey() {
-            return key;
-        }
-
-        public V getValue() {
-            return value;
-        }
-
-        public void setValue(V value) {
-            this.value = value;
-        }
-
-        public Entry<K, V> getNext() {
-            return next;
-        }
-
-        public void setNext(Entry<K, V> next) {
-            this.next = next;
-        }
-
-        @Override
-        public String toString() {
-            return "[" + key + ", " + value + "]";
-        }
+    private int getHash(K key) {
+        return key == null ? 0 : Math.abs(key.hashCode());
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        for (Entry entry: buckets) {
+        for (Entry entry : buckets) {
             sb.append("[");
             while (entry != null) {
                 sb.append(entry);
@@ -113,7 +80,35 @@ public class MyMap<K, V> {
             }
             sb.append("]");
         }
-        return "[" + sb.toString() + "]";
+        return "{" + sb.toString() + "}";
     }
 
+    static class Entry<K, V> {
+        final K key;
+        V value;
+        Entry<K, V> next;
+
+        public Entry(K key, V value, Entry<K, V> next) {
+            this.key = key;
+            this.value = value;
+            this.next = next;
+        }
+
+        public K getKey() {
+            return key;
+        }
+
+        public V getValue() {
+            return value;
+        }
+
+        public Entry<K, V> getNext() {
+            return next;
+        }
+
+        @Override
+        public String toString() {
+            return "{" + key + ", " + value + "}";
+        }
+    }
 }

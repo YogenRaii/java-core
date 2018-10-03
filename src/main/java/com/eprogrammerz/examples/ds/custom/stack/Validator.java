@@ -1,15 +1,22 @@
 package com.eprogrammerz.examples.ds.custom.stack;
 
 import org.junit.Test;
+import org.mockito.Mockito;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * @author Yogen Rai
  */
 public class Validator {
     @Test
-    public void testMyStack() {
+    public void testMyStack() throws ExecutionException, InterruptedException {
         MyStack<Integer> myStack = new MyStack();
         myStack.push(5);
         myStack.push(7);
