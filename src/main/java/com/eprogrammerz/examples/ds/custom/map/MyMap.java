@@ -107,6 +107,27 @@ public class MyMap<K, V> {
         }
 
         @Override
+        public boolean equals(Object obj) {
+            if (obj == this) return true;
+
+            if (obj instanceof Entry) {
+                Entry entry = (Entry) obj;
+
+                return key.equals(entry.getKey()) &&
+                        value.equals(entry.getValue());
+            }
+            return false;
+        }
+
+        @Override
+        public int hashCode() {
+            int hash = 13;
+            hash = 17 * hash + ((key == null) ? 0 : key.hashCode());
+            hash = 17 * hash + ((value == null) ? 0 : value.hashCode());
+            return hash;
+        }
+
+        @Override
         public String toString() {
             return "{" + key + ", " + value + "}";
         }
