@@ -10,18 +10,19 @@ import static junit.framework.TestCase.assertEquals;
 public class Validator {
     @Test
     public void testMyHashSet() {
-        MyHashSet<Integer> set = new MyHashSet<>();
+        MyHashSet<String> set = new MyHashSet<>();
 
-        set.add(3);
-        set.add(4);
-        set.add(8);
-        set.add(4);
-        set.add(8);
-        set.add(1000);
+        set.add("USA");
+        set.add("Nepal");
+        set.add("England");
+        set.add("Netherland");
+        set.add("Canada");
+        set.add("Bhutan");
 
-        assertEquals(4, set.size());
+        assertEquals(6, set.size());
 
-        assertEquals(Integer.valueOf(8), set.remove(8));
-        assertEquals(3, set.size());
+        // test removal of element
+        assertEquals("Bhutan", set.remove("Bhutan"));
+        assertEquals(5, set.size());
     }
 }
