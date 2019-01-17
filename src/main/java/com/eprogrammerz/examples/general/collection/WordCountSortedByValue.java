@@ -5,9 +5,10 @@ package com.eprogrammerz.examples.general.collection;
 
 import org.junit.Test;
 
-import java.util.HashMap;
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import static org.junit.Assert.assertEquals;
@@ -21,34 +22,25 @@ public class WordCountSortedByValue {
     public void testSortByValue() {
         String[] elems = {"a", "b", "c", "b", "d", "a", "b"};
 
-        Map<String, Integer> wordCounts  = countWords(elems);
+        Map<String, Long> wordCounts  = countWords(elems);
 
-        Map<String, Integer> expected = new LinkedHashMap<>();
-        expected.put("b", 3);
-        expected.put("a", 2);
-        expected.put("c", 1);
-        expected.put("d", 1);
+        Map<String, Long> expected = new LinkedHashMap<>();
+        expected.put("b", 3L);
+        expected.put("a", 2L);
+        expected.put("c", 1L);
+        expected.put("d", 1L);
 
         assertEquals(expected, wordCounts);
     }
 
-    public Map<String, Integer> countWords(final String[] words) {
-        final Map<String, Integer> wordCounts = new HashMap<>();
+    public Map<String, Long> countWords(final String[] words) {
 
-        for (String word : words) {
-            if (wordCounts.containsKey(word)) {
-                wordCounts.put(word, wordCounts.get(word) + 1);
-            } else {
-                wordCounts.put(word, 1);
-            }
-        }
+        final Map<String, Long> wordCounts = Arrays.stream(words).collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 
-        final Map<String, Integer> sortedByCount = wordCounts.entrySet()
+        return wordCounts.entrySet()
                 .stream()
-                .sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
+                .sorted(Map.Entry.<String, Long>comparingByValue().reversed())
 //                .sorted((e1, e2) -> e2.getValue().compareTo(e1.getValue()))
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
-
-        return sortedByCount;
     }
 }
