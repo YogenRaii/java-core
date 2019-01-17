@@ -67,4 +67,15 @@ public class StreamExample {
 
         assertEquals(expected, sortMapByValue(strings));
     }
+
+    public List<String> removeDuplicateSort(List<String> names) {
+        return names.stream().distinct().sorted(String::compareToIgnoreCase).collect(Collectors.toList());
+    }
+
+    @Test
+    public void testRemoveDuplicateSort() {
+        List<String> names = Arrays.asList("Yogen", "Pratima", "Prateema", "Yogen", "Yogen", "Rai", "Pratima");
+        List<String> expected = Arrays.asList("Prateema" , "Pratima", "Rai", "Yogen");
+        assertEquals(expected, removeDuplicateSort(names));
+    }
 }
