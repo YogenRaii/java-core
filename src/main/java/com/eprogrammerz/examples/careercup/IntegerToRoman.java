@@ -41,6 +41,18 @@ public class IntegerToRoman {
         return integerToRoman.get(largest) + integerToRoman(num - largest);
     }
 
+    public String integerToRomanIterative(int num) {
+        StringBuilder sb = new StringBuilder();
+
+        while (num != 0) {
+            int largest = integerToRoman.floorKey(num);
+            sb.append(integerToRoman.get(largest));
+            num -= largest;
+        }
+
+        return sb.toString();
+    }
+
     @Test
     public void testIntegerToRoman() {
         assertEquals("III", integerToRoman(3));
@@ -56,5 +68,22 @@ public class IntegerToRoman {
         assertEquals("XCVII", integerToRoman(97));
         assertEquals("MM", integerToRoman(2000));
         assertEquals("MMI", integerToRoman(2001));
+    }
+
+    @Test
+    public void testIntegerToRomanIterative() {
+        assertEquals("III", integerToRomanIterative(3));
+        assertEquals("IV", integerToRomanIterative(4));
+        assertEquals("V", integerToRomanIterative(5));
+        assertEquals("VI", integerToRomanIterative(6));
+        assertEquals("IX", integerToRomanIterative(9));
+        assertEquals("XI", integerToRomanIterative(11));
+        assertEquals("XIV", integerToRomanIterative(14));
+        assertEquals("XV", integerToRomanIterative(15));
+        assertEquals("XXIV", integerToRomanIterative(24));
+        assertEquals("XXVIII", integerToRomanIterative(28));
+        assertEquals("XCVII", integerToRomanIterative(97));
+        assertEquals("MM", integerToRomanIterative(2000));
+        assertEquals("MMI", integerToRomanIterative(2001));
     }
 }
