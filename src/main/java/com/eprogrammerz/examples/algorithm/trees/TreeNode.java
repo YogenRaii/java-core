@@ -1,5 +1,7 @@
 package com.eprogrammerz.examples.algorithm.trees;
 
+import lombok.ToString;
+
 public class TreeNode {
     int val;
     TreeNode left;
@@ -9,5 +11,10 @@ public class TreeNode {
         val = x;
         left = null;
         right = null;
+    }
+
+    @Override
+    public String toString() {
+        return "(" + val + ")";
     }
 }
