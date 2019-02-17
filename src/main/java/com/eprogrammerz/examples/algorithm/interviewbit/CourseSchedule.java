@@ -2,10 +2,7 @@ package com.eprogrammerz.examples.algorithm.interviewbit;
 
 import org.junit.Test;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map;
-import java.util.Queue;
+import java.util.*;
 
 import static org.junit.Assert.*;
 
@@ -98,57 +95,46 @@ public class CourseSchedule {
      * @return
      */
     public int solve(int count, int[] prerequisites, int[] courses) {
+        // create adj list of prerequisites to course
+        List<Integer>[] prereqToCourses = new ArrayList[count + 1];
 
-        if (prerequisites.length == 0) return 0;
-
-        // find course to prerequisite count
-        Map<Integer, Integer> coursePrereqCount = new HashMap<>();
-
-        for (int i = 0; i < courses.length; i++) {
-            if (coursePrereqCount.containsKey(courses[i])) {
-                coursePrereqCount.put(courses[i], coursePrereqCount.get(courses[i]) + 1);
-            } else {
-                coursePrereqCount.put(courses[i], 1);
-            }
-
-            if (!coursePrereqCount.containsKey(prerequisites[i])) {
-                coursePrereqCount.put(prerequisites[i], 0);
-            }
+        for (int i = 0; i < prereqToCourses.length; i++) {
+            prereqToCourses[i] = new ArrayList<>();
         }
 
-        // find courses that doesn't have prerequisite
-        Queue<Integer> noPreCourses = new LinkedList<>();
-
-        for (Map.Entry<Integer, Integer> entry : coursePrereqCount.entrySet()) {
-            if (entry.getValue() == 0) {
-                noPreCourses.add(entry.getKey());
-            }
+        for (int i = 0; i < prerequisites.length; i++) {
+            prereqToCourses[prerequisites[i]].add(courses[i]);
         }
 
-        int completed = noPreCourses.size();
-        // do until no courses has prerequisite
-        while (!noPreCourses.isEmpty()) {
+        // to track if the prerequisite is completed
+        boolean[] visited = new boolean[count+1];
 
-            int prereq = noPreCourses.poll();
+        Stack<Integer> stack = new Stack<>();
+        stack.push(prerequisites[0]);
+        visited[prerequisites[0]] = true;
 
-            for (int i = 0; i < prerequisites.length; i++) {
-                if (prerequisites[i] == prereq) {
-                    coursePrereqCount.put(courses[i], coursePrereqCount.get(courses[i]) - 1);
+        while (!stack.isEmpty()) {
+            int prereq = stack.pop();
+            List<Integer> dependents = prereqToCourses[prereq];
 
-                    if (coursePrereqCount.get(courses[i]) == 0) {
-                        completed++;
-                        noPreCourses.add(courses[i]);
-                    }
+            for (int i = 0; i < dependents.size(); i++) {
+                int dependent = dependents.get(i);
+
+                // if dependent is already completed, then it forms cycle and hence course can not be completed
+                if (visited[dependent]) return 0;
+                else {
+                    visited[dependent] = true;
+                    stack.push(dependent);
                 }
             }
         }
 
-        return completed == count ? 1 : 0;
+        return 1;
     }
 
     @Test
     public void testSolve() {
-
+        assertEquals(1, solve(4, new int[]{1, 2, 1}, new int[]{2, 3, 4}));
         assertEquals(1, solve(2, new int[]{1}, new int[]{0}));
         assertEquals(0, solve(2, new int[]{1, 0}, new int[]{0, 1}));
 
@@ -166,49 +152,37 @@ public class CourseSchedule {
 
         if (coursePairs.length == 0) return true;
 
-        // find course to prerequisite count
-        Map<Integer, Integer> coursePrereqCount = new HashMap<>();
+        // find prerequisite to dependents list (adj list)
+        int[][] adjMatrix = new int[numCourses][numCourses];
+        int[] prereCount = new int[numCourses];
 
-        for (int[] pair : coursePairs) {
-            if (coursePrereqCount.containsKey(pair[1])) {
-                coursePrereqCount.put(pair[1], coursePrereqCount.get(pair[1]) + 1);
-            } else {
-                coursePrereqCount.put(pair[1], 1);
-            }
-
-            if (!coursePrereqCount.containsKey(pair[0])) {
-                coursePrereqCount.put(pair[0], 0);
-            }
+        for (int[] pair: coursePairs) {
+            adjMatrix[pair[0]][pair[1]] = 1;
+            prereCount[pair[1]]++;
         }
 
-        // find courses that doesn't have prerequisite
-        Queue<Integer> noPreCourses = new LinkedList<>();
+        Stack<Integer> noPreCourses = new Stack<>();
 
-        for (Map.Entry<Integer, Integer> entry : coursePrereqCount.entrySet()) {
-            if (entry.getValue() == 0) {
-                noPreCourses.add(entry.getKey());
-            }
+        for (int i = 0; i < prereCount.length; i++) {
+            if (prereCount[i] == 0) noPreCourses.push(i);
         }
 
-        int completed = noPreCourses.size();
-        // do until no courses has prerequisite
+        int count = 0;
+
         while (!noPreCourses.isEmpty()) {
+            int noPre = noPreCourses.pop();
+            count++;
 
-            int prereq = noPreCourses.poll();
-
-            for (int i = 0; i < coursePairs.length; i++) {
-                if (coursePairs[i][0] == prereq) {
-                    coursePrereqCount.put(coursePairs[i][1], coursePrereqCount.get(coursePairs[i][1]) - 1);
-
-                    if (coursePrereqCount.get(coursePairs[i][1]) == 0) {
-                        completed++;
-                        noPreCourses.add(coursePairs[i][1]);
+            for (int i = 0; i < numCourses; i++) {
+                if (adjMatrix[noPre][i] != 0) {
+                    if (--prereCount[i] == 0) {
+                        noPreCourses.push(i);
                     }
                 }
             }
         }
 
-        return completed == numCourses;
+        return count == numCourses;
     }
 
     @Test
@@ -216,5 +190,6 @@ public class CourseSchedule {
         assertTrue(canFinish(2, new int[][]{{1, 0}}));
         assertTrue(canFinish(1, new int[][]{}));
         assertFalse(canFinish(2, new int[][]{{1, 0}, {0, 1}}));
+        assertTrue(canFinish(3, new int[][]{{0, 1}, {0, 2}, {1,2}}));
     }
 }
