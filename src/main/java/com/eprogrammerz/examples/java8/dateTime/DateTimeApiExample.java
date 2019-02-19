@@ -20,8 +20,10 @@ public class DateTimeApiExample {
         System.out.println(currentTime);
         System.out.println(changedTime);
 
-        Date threeDaysBack = Date.from(LocalDateTime.now().minusDays(3).atZone(ZoneId.systemDefault()).toInstant());
+        // it is easy to do the manipulation on date
+        System.out.println(currentTime.minusDays(3));
 
+        Date threeDaysBack = Date.from(LocalDateTime.now().minusDays(3).atZone(ZoneId.systemDefault()).toInstant());
         System.out.println(threeDaysBack);
     }
 }
