@@ -1,6 +1,8 @@
 package com.eprogrammerz.examples.java8.dateTime;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.ZoneId;
 import java.util.Date;
 
@@ -25,5 +27,13 @@ public class DateTimeApiExample {
 
         Date threeDaysBack = Date.from(LocalDateTime.now().minusDays(3).atZone(ZoneId.systemDefault()).toInstant());
         System.out.println(threeDaysBack);
+
+        LocalDate localDate = LocalDate.now();
+        System.out.println(localDate);
+        System.out.println(localDate.getMonth().getValue());
+
+        LocalTime localTime = LocalTime.now();
+        System.out.println(localTime);
+        System.out.println(localTime.getHour());
     }
 }
