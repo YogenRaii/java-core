@@ -17,6 +17,8 @@ import java.util.List;
  *    3     7
  *   / \     \
  *  2   5     9
+ *
+ *  [[2], [3], [6, 5], [7], [9]]
  */
 public class VerticalOrderTraversal {
     public List<List<Integer>> verticalOrderTraversal(TreeNode root) {
@@ -77,7 +79,7 @@ public class VerticalOrderTraversal {
         root.left.right = new TreeNode(5);
 
         List<List<Integer>> traversal = verticalOrderTraversal(root);
-        System.out.println(traversal);
+        System.out.println(traversal); // [[2], [3], [6, 5], [7], [9]]
     }
 }
 

@@ -32,7 +32,7 @@ public class LevelOrderTraversal {
         Queue<TreeNode> queue = new LinkedList<>();
         queue.add(tree);
 
-        traversal.add(Arrays.asList(tree.val));
+        traversal.add(Collections.singletonList(tree.val));
 
         List<Integer> currentLevel = new ArrayList<>();
 
@@ -75,6 +75,58 @@ public class LevelOrderTraversal {
         root.right.right = new TreeNode(7);
 
         List<List<Integer>> traversal = levelOrder(root);
+        System.out.println(traversal); //[[3], [9, 20], [15, 7]]
+    }
+
+    /**
+     *
+     * Add nodes into queue and iterate upto the number of times equal to
+     * size of the queue on each level
+     *
+     *
+     * @param tree
+     * @return
+     */
+    public List<List<Integer>> levelOrderBetter(TreeNode tree) {
+        List<List<Integer>> traversals = new ArrayList<>();
+
+        if (tree == null) return traversals;
+
+        // track the nodes while traversing
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(tree);
+
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            List<Integer> currentLevel = new ArrayList<>();
+            for (int i = 0; i < size; i++) {
+                TreeNode node = queue.poll();
+                currentLevel.add(node.val);
+
+                if (node.left != null) {
+                    queue.add(node.left);
+                }
+
+                if (node.right != null) {
+                    queue.add(node.right);
+                }
+            }
+            traversals.add(currentLevel);
+        }
+
+        return traversals;
+    }
+
+    @Test
+    public void testLevelOrderBetter() {
+        TreeNode root = new TreeNode(3);
+        root.left = new TreeNode(9);
+        root.right = new TreeNode(20);
+
+        root.right.left = new TreeNode(15);
+        root.right.right = new TreeNode(7);
+
+        List<List<Integer>> traversal = levelOrderBetter(root);
         System.out.println(traversal); //[[3], [9, 20], [15, 7]]
     }
 }
