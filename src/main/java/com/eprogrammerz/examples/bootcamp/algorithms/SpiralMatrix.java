@@ -22,50 +22,33 @@ public class SpiralMatrix {
 
         int counter = 1;
 
-        int start_row = 0;
-        int end_row = n - 1;
-        int start_col = 0;
-        int end_col = n - 1;
+        int startRow = 0;
+        int endRow = n - 1;
+        int startCol = 0;
+        int endCol = n - 1;
 
-        while (start_row <= end_row && start_col <= end_col){
-            int s_r = start_row;
-            int e_r = end_row;
-            int s_c = start_col;
-            int e_c = end_col;
+        while (startRow <= endRow && startCol <= endCol){
 
-            while (s_c <= e_c) {
-                matrix[s_r][s_c] = counter++;
-                s_c++;
+            for (int col = startCol; col <= endCol; col++) {
+                matrix[startRow][col] = counter++;
             }
-            s_c--;
+            startRow++;
 
-            start_row++;
-            s_r = start_row;
-            while (s_r <= e_r) {
-                matrix[s_r][s_c] = counter++;
-                s_r++;
+            for (int row = startRow; row <= endRow; row++) {
+                matrix[row][endCol] = counter++;
             }
-            s_r--;
+            endCol--;
 
-            end_col--;
-
-            s_c = end_col;
-            e_c = start_col;
-            while (s_c >= e_c) {
-                matrix[e_r][s_c] = counter++;
-                s_c--;
+            for (int col = endCol; col >= startCol; col--) {
+                matrix[endRow][col] = counter++;
             }
-            s_c++;
+            endRow--;
 
-            end_row--;
-
-            s_r = end_row;
-            e_r = start_row;
-            while (s_r >= e_r) {
-                matrix[s_r][e_c] = counter++;
-                s_r--;
+            for (int row = endRow; row >= startRow; row--) {
+                matrix[row][startCol] = counter++;
             }
-            start_col++;
+
+            startCol++;
         }
         return matrix;
     }
