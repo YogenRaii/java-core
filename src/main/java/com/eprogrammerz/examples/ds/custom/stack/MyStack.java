@@ -21,7 +21,7 @@ public class MyStack<T> {
     private int size;
 
     void push(T data) {
-        StackNode newNode = new StackNode(data);
+        StackNode<T> newNode = new StackNode<>(data);
 
         newNode.next = top;
 

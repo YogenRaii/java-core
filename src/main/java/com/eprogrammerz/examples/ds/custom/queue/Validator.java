@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import static junit.framework.TestCase.assertFalse;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * @author Yogen Rai
@@ -27,5 +28,11 @@ public class Validator {
         assertEquals(Integer.valueOf(4), queue.dequeue());
         assertEquals(Integer.valueOf(9), queue.peek());
         assertFalse(queue.isEmpty());
+
+        // more
+        assertEquals(Integer.valueOf(9), queue.dequeue());
+        assertEquals(Integer.valueOf(13), queue.dequeue());
+        assertEquals(Integer.valueOf(18), queue.dequeue());
+        assertTrue(queue.isEmpty());
     }
 }
