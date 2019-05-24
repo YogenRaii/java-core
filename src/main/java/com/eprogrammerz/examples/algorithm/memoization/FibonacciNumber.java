@@ -44,7 +44,7 @@ public class FibonacciNumber {
 
         long startTime = System.currentTimeMillis();
         System.out.println(fib(45));
-        System.out.println("Time taken (w/o memo): " + (System.currentTimeMillis() - startTime) + " ms");
+        System.out.println("Time taken (w/o memo): " + (System.currentTimeMillis() - startTime) + " ms"); // 4694 ms
 
         // memoization
         System.out.println(fibonacciMemo(5));
@@ -53,6 +53,6 @@ public class FibonacciNumber {
 
         startTime = System.currentTimeMillis();
         System.out.println(fibonacciMemo(45));
-        System.out.println("Time taken (w memo): " + (System.currentTimeMillis() - startTime) + " ms");
+        System.out.println("Time taken (w memo): " + (System.currentTimeMillis() - startTime) + " ms"); // 0 ms
     }
 }
