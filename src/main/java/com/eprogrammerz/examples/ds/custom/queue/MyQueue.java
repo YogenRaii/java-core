@@ -23,42 +23,42 @@ public class MyQueue<T> {
         }
     }
 
-    private QueueNode<T> first;
+    private QueueNode<T> front;
 
-    private QueueNode<T> last;
+    private QueueNode<T> back;
 
     void enqueue(T data) {
         QueueNode<T> node = new QueueNode<>(data);
-        if (last != null) {
-            last.next = node;
+        if (back != null) {
+            back.next = node;
         }
 
-        last = node;
+        back = node;
 
-        if (first == null) {
-            first = last;
+        if (front == null) {
+            front = back;
         }
     }
 
     T dequeue() {
-        if (first == null) throw new NoSuchElementException();
-        T data =first.data;
+        if (front == null) throw new NoSuchElementException();
+        T data =front.data;
 
-        first = first.next;
+        front = front.next;
 
-        if (first == null) {
-            last = null;
+        if (front == null) {
+            back = null;
         }
         return data;
     }
 
     T peek() {
-        if (first == null) throw new NoSuchElementException();
+        if (front == null) throw new NoSuchElementException();
 
-        return first.data;
+        return front.data;
     }
 
     boolean isEmpty() {
-        return first == null;
+        return front == null;
     }
 }
