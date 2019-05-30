@@ -11,19 +11,11 @@ public class Weaver {
     public Queue<Object> weave(Queue<String> q1, Queue<Integer> q2) {
         Queue<Object> result = new LinkedList<>();
 
-        while (!q1.isEmpty() && !q2.isEmpty()) {
-            result.add(q1.poll());
-            result.add(q2.poll());
-        }
-
-        if (!q1.isEmpty()) {
-            while (!q1.isEmpty()) {
+        while (q1.peek() != null || q2.peek() != null) {
+            if (q1.peek() != null) {
                 result.add(q1.poll());
             }
-        }
-
-        if (!q2.isEmpty()) {
-            while (!q2.isEmpty()) {
+            if (q2.peek() != null) {
                 result.add(q2.poll());
             }
         }
