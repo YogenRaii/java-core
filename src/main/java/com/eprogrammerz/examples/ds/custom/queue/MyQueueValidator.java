@@ -9,7 +9,7 @@ import static org.junit.Assert.assertTrue;
 /**
  * @author Yogen Rai
  */
-public class Validator {
+public class MyQueueValidator {
     @Test
     public void testMyQueue() {
         MyQueue<Integer> queue = new MyQueue<>();
