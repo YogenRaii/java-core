@@ -12,14 +12,14 @@ public class MyLinkedListValidator {
         MyLinkedList<String> linkedList = new MyLinkedList<>();
         assertEquals(0, linkedList.size());
 
-        linkedList.addFirst("first");
-        linkedList.addFirst("second");
+        linkedList.addFirst("first"); // ["first"]
+        linkedList.addFirst("second"); // ["second", "first"]
 
         assertEquals(2, linkedList.size());
         assertEquals("second", linkedList.getFirst());
         assertEquals("first", linkedList.getLast());
 
-        linkedList.addLast("last");
+        linkedList.addLast("last"); // ["second", "first", "last"]
         assertEquals(3, linkedList.size());
         assertEquals("last", linkedList.getLast());
 
@@ -28,13 +28,25 @@ public class MyLinkedListValidator {
         assertEquals("last", linkedList.getAt(2));
         assertNull(linkedList.getAt(3));
 
-        linkedList.removeAt(1);
+        linkedList.removeAt(1); // ["second", "last"]
         assertEquals(2, linkedList.size());
         assertEquals("last", linkedList.getAt(1));
 
-        assertTrue(linkedList.insertAt(1, "new"));
+        assertTrue(linkedList.insertAt(1, "new")); // ["second", "new", "last"]
         assertEquals(3, linkedList.size());
         assertEquals("new", linkedList.getAt(1));
 
+        assertEquals("new", linkedList.midElement());
+
+        linkedList.addLast("yogen");  // ["second", "first", "last", "yogen"]
+        assertEquals(4, linkedList.size());
+        assertEquals("new", linkedList.getAt(1));
+        assertEquals("new", linkedList.midElement());
+
+        linkedList.addLast("rai"); // ["second", "first", "last", "yogen", "rai"];
+        assertEquals("last", linkedList.midElement());
+
+        linkedList.addLast("ilam"); // ["second", "first", "last", "yogen", "rai", "ilam"]
+        assertEquals("last", linkedList.midElement());
     }
 }

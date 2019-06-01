@@ -99,6 +99,28 @@ public class MyLinkedList<T> {
         }
     }
 
+    /**
+     * Return mid element of linked list
+     * If there is two mid element, return last element of first half
+     * eg.
+     * 1 2 3 -> 2
+     * 1 2 3 4 -> 2
+     * @return mid element
+     */
+
+    public T midElement() {
+        if (head == null) return null;
+
+        Node<T> runner = head;
+        Node<T> node = head;
+
+        while (runner.next != null && runner.next.next != null) {
+            runner = runner.next.next;
+            node = node.next;
+        }
+        return node.data;
+    }
+
     public int size() {
         return size;
     }
