@@ -1,5 +1,10 @@
 package com.eprogrammerz.examples.ds.custom.linkedList;
 
+import org.junit.Test;
+
+import static junit.framework.TestCase.assertFalse;
+import static junit.framework.TestCase.assertTrue;
+
 /**
  * @author Yogen Rai
  *
@@ -13,17 +18,38 @@ public class CycleDetector {
     boolean hasCycle(Node head) {
         if (head == null) return false;
 
-        Node current = head, fast = head, faster = head;
+        Node node = head, runner = head;
 
-        while (current != null && fast.next != null && faster.next != null) {
-            fast = faster.next;
-            faster = fast.next;
+        while (runner.next != null && runner.next.next != null) {
+            runner = runner.next.next;
+            node = node.next;
 
-            if (current == fast || current == faster) return true;
-
-            current = current.next;
+            if (runner == node) return true;
         }
         return false;
+    }
+
+    @Test
+    public void testCycleDetector() {
+        Node n1 = new Node(1); // 1
+        Node n2 = new Node(2, n1); // 2 -> 1
+        Node n3 = new Node(3, n2); // 3 -> 2 -> 1
+        Node n4 = new Node(4, n3); // 4 -> 3 -> 2 -> 1
+        Node n5 = new Node(5, n4); // 5 -> 4 -> 3 -> 2 -> 1
+
+        // till now no cycle
+        assertFalse(hasCycle(n5));
+
+        // now last node points to first node
+        n1.next = n5;
+        assertTrue(hasCycle(n5));
+
+        // reset
+        n1.next = null;
+        assertFalse(hasCycle(n5));
+
+        n1.next = n3;
+        assertTrue(hasCycle(n5));
     }
 }
 
