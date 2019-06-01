@@ -59,6 +59,7 @@ public class KthLastElement {
         node3.next = node4;
         node4.next = node5;
 
-        System.out.println(findKthNodeIterative(head, 7));
+        System.out.println(findKthNodeIterative(head, 7)); // (null)
+        System.out.println(findKthNodeIterative(head, 5)); // (2)
     }
 }

@@ -24,7 +24,7 @@ public class CycleDetector {
             runner = runner.next.next;
             node = node.next;
 
-            if (runner == node) return true;
+            if (runner == node) return true;  // reference should be compared
         }
         return false;
     }
