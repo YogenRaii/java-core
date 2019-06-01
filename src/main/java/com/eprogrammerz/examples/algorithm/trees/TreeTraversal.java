@@ -73,6 +73,12 @@ public class TreeTraversal {
 
         assertEquals(expected.toString(), traversal.toString());
     }
+
+    @Test
+    public void testGetLevelWidths() {
+        List<Integer> widths = Arrays.asList(1,2,3);
+        assertEquals(widths, tree.getLevelWidth());
+    }
 }
 
 class BinaryTree {
@@ -149,6 +155,35 @@ class BinaryTree {
         if (node.left != null) postOrderTraversal(node.left, traversal);
         if (node.right != null) postOrderTraversal(node.right, traversal);
         traversal.add(node);
+    }
+
+    public List<Integer> getLevelWidth() {
+        List<Integer> widths = new ArrayList<>();
+
+        if (root == null) return widths;
+
+        Queue<Node> queue = new LinkedList<>();
+        queue.add(root);
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            int width = 0;
+            while (size > 0) {
+                Node node = queue.poll();
+                if (node.left != null) {
+                    queue.add(node.left);
+                }
+
+                if (node.right != null) {
+                    queue.add(node.right);
+                }
+
+                width++;
+                size--;
+            }
+            widths.add(width);
+        }
+
+        return widths;
     }
 }
 
