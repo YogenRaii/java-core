@@ -54,4 +54,20 @@ public class Validator {
         assertEquals(1, minStack.pop());
         assertEquals(2, minStack.min());
     }
+
+    @Test
+    public void testSortedStack() {
+        SortedStack sortedStack = new SortedStack();
+        sortedStack.push(2);
+        sortedStack.push(4);
+        sortedStack.push(1);
+        sortedStack.push(5);
+        sortedStack.push(0);
+
+        assertEquals(0, sortedStack.pop());
+        assertEquals(1, sortedStack.pop());
+        assertEquals(2, sortedStack.pop());
+        assertEquals(4, sortedStack.pop());
+        assertEquals(5, sortedStack.pop());
+    }
 }
