@@ -11,13 +11,21 @@ import java.util.Queue;
  * Route Between Nodes: Given a directed graph, design an algorithm to find out whether there is a route between two nodes.
  */
 public class DirectedGraph {
-    private List<Node> nodes = new ArrayList<>();
+    private List<Node> nodes;
+
+    public DirectedGraph(List<Node> nodes) {
+        this.nodes = nodes;
+    }
 
     // using BFS
     public boolean isRouteBetween(Node start, Node end) {
         Queue<Node> neighbors = new LinkedList<>();
 
         if (start.id == end.id) return true;
+
+        for (Node node: nodes) {
+            node.visited = false;
+        }
 
         neighbors.add(start);
 

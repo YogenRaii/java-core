@@ -12,7 +12,7 @@ import static org.junit.Assert.*;
  * @author Yogen Rai
  */
 public class TestDirectedGraph {
-    DirectedGraph graph;
+
 
     @Before
     public void setUp() {
@@ -24,11 +24,9 @@ public class TestDirectedGraph {
          *            1    2    3
          *
          */
-        graph = new DirectedGraph();
     }
     @Test
     public void testRouteBetweenNodes() {
-
         Node a = new Node(1);
         Node b = new Node(2);
         Node c = new Node(3);
@@ -39,11 +37,14 @@ public class TestDirectedGraph {
         Node f = new Node(6);
         f.connections = Arrays.asList(d,e);
 
-//        assertTrue(graph.isRouteBetween(f, a)); // OK
-//        assertFalse(graph.isRouteBetween(a, c)); // OK
-//        assertFalse(graph.isRouteBetween(a,f));
-        assertTrue(graph.isRouteBetween(e,a));
+        DirectedGraph graph = new DirectedGraph(Arrays.asList(a,b,c,d,e,f));
 
+
+        assertTrue(graph.isRouteBetween(f, a)); // OK
+        assertFalse(graph.isRouteBetween(a, c)); // OK
+        assertFalse(graph.isRouteBetween(a,f));
+        assertFalse(graph.isRouteBetween(a, e));
+        assertTrue(graph.isRouteBetween(e, a));
     }
 
     @Test
@@ -58,7 +59,8 @@ public class TestDirectedGraph {
         Node f = new Node(6);
         f.connections = Arrays.asList(d,e);
 
-        assertThat(Arrays.asList(f, d ,a), is(graph.findRoute(f,a)));
+        DirectedGraph graph = new DirectedGraph(Arrays.asList(a,b,c,d,e,f));
 
+        assertThat(Arrays.asList(f, d ,a), is(graph.findRoute(f,a)));
     }
 }
