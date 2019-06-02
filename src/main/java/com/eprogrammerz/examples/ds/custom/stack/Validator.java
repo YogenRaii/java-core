@@ -36,4 +36,22 @@ public class Validator {
         assertEquals(3, myStack.size());
         assertEquals(Integer.valueOf(100), myStack.peek());
     }
+
+    @Test
+    public void testMinStack() {
+        MinStack minStack = new MinStack();
+        minStack.push(2); // [2]
+        minStack.push(4); // [4,2]
+        minStack.push(1); // [1,4,2]
+        minStack.push(5); // [5,1,4,2]
+        minStack.push(0); // [0,5,1,4,2]
+
+        assertEquals(0, minStack.min());
+        assertEquals(0, minStack.pop());
+        assertEquals(1, minStack.min());
+        assertEquals(5, minStack.pop());
+        assertEquals(1, minStack.min());
+        assertEquals(1, minStack.pop());
+        assertEquals(2, minStack.min());
+    }
 }
