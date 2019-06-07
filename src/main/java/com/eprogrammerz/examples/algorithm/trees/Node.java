@@ -71,10 +71,9 @@ public class Node {
     public boolean isSubtree(Node that) {
         // do bfs on this
         // if node found same as of that.root
-        // then clear the queue of tree
-        // start bfs for both, each queue poll should match
+        // then traverse tree and see if left and right on both trees match
 
-        if (that == null) return false;
+        if (that == null) return true;
 
         Queue<Node> thisQueue = new LinkedList<>();
         thisQueue.add(this);
@@ -99,26 +98,11 @@ public class Node {
     }
 
     private boolean isSubtree(Node t1, Node t2) {
+        if (t1 == null && t2 == null) return true;
 
-        Queue<Node> t1Queue = new LinkedList<>();
-        t1Queue.add(t1);
+        if (t1 == null || t2 == null || t1.data != t2.data) return false;
 
-        Queue<Node> t2Queue = new LinkedList<>();
-        t2Queue.add(t2);
-
-        while (!t1Queue.isEmpty() && !t2Queue.isEmpty()) {
-            Node t1Node = t1Queue.poll();
-            Node t2Node = t2Queue.poll();
-
-            if (t1Node.data != t2Node.data) return false;
-
-            if (t1Node.left != null) t1Queue.add(t1Node.left);
-            if (t1Node.right != null) t1Queue.add(t1Node.right);
-
-            if (t2Node.left != null) t2Queue.add(t2Node.left);
-            if (t2Node.right != null) t2Queue.add(t2Node.right);
-        }
-        return t1Queue.isEmpty() && t2Queue.isEmpty();
+        return isSubtree(t1.left, t2.left) && isSubtree(t1.right, t2.right);
     }
 
     @Override

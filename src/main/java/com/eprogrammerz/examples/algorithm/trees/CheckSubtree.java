@@ -49,5 +49,14 @@ public class CheckSubtree {
          */
         that.left.right = new Node(10);
         assertFalse(root.isSubtree(that));
+
+        /**
+         *      15
+         *     /
+         *   17
+         */
+        Node another = new Node(15);
+        another.left = new Node(17);
+        assertFalse(root.isSubtree(another));
     }
 }
