@@ -2,6 +2,7 @@ package com.eprogrammerz.examples.algorithm.trees;
 
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Stack;
 
 public class Node {
     int data;
@@ -103,6 +104,42 @@ public class Node {
         if (t1 == null || t2 == null || t1.data != t2.data) return false;
 
         return isSubtree(t1.left, t2.left) && isSubtree(t1.right, t2.right);
+    }
+
+    /**
+     * Count path that sums to the target value
+     *
+     * @return
+     */
+    public int findPaths(int target) {
+        Queue<Node> queue = new LinkedList<>();
+        queue.add(this);
+
+        int count = 0;
+        while (!queue.isEmpty()) {
+            Node node = queue.poll();
+
+            count += findPaths(node, target, 0);
+
+            if (node.left != null) queue.add(node.left);
+
+            if (node.right != null) queue.add(node.right);
+        }
+        return count;
+    }
+
+    private int findPaths(Node node, int target, int sum) {
+        if (node == null) return 0;
+        sum += node.data;
+
+        int totalPaths = 0;
+        if (target == sum) {
+            totalPaths++;
+        }
+        totalPaths += findPaths(node.left, target, sum);
+        totalPaths += findPaths(node.right, target, sum);
+
+        return totalPaths;
     }
 
     @Override
