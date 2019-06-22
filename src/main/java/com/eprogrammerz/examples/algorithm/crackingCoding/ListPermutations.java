@@ -11,7 +11,7 @@ import static org.junit.Assert.assertEquals;
 /**
  * Find permutations of list of numbers
  */
-public class Permutations {
+public class ListPermutations {
     public List<List<Integer>> findPermutations(List<Integer> num) {
         List<List<Integer>> permutations = new ArrayList<>();
         findPermutations(num, new ArrayList<>(), permutations);
