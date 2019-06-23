@@ -36,8 +36,7 @@ public class PowerSet {
             Integer item = integers.get(index);
             Set<Set<Integer>> moreSubset = new LinkedHashSet<>();
             for (Set<Integer> subset: powerSet) {
-                Set<Integer> newSubset = new LinkedHashSet<>();
-                newSubset.addAll(subset);
+                Set<Integer> newSubset = new LinkedHashSet<>(subset);
                 newSubset.add(item);
                 moreSubset.add(newSubset);
             }
