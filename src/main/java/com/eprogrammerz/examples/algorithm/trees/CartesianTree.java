@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.junit.Assert.assertEquals;
+
 public class CartesianTree {
     private class Node {
         int val;
@@ -47,7 +49,11 @@ public class CartesianTree {
         traversal.add(3);
         traversal.add(7);
         traversal.add(5);
+
         Node root = buildTree(traversal);
-        System.out.println(root);
+        assertEquals(7, root.val);
+        assertEquals(5, root.right.val);
+        assertEquals(3, root.left.val);
+        assertEquals(1, root.left.left.val);
     }
 }
