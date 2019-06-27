@@ -14,11 +14,14 @@ public class TreeTraversal {
     private BinaryTree tree;
 
     /**
-     *          1
-     *       /     \
-     *     2         3
-     *   /   \        \
-     *  4     5        6
+     *         1
+     *      /     \
+     *    2         3
+     *  /   \        \
+     * 4     5        6
+     *
+     *
+     * postorder: 1 2 4 5 3 6
      */
 
     @Before
@@ -53,14 +56,30 @@ public class TreeTraversal {
     }
 
     @Test
+    public void testInOrderTraversalRecursive() {
+        List<Integer> expected = Arrays.asList(4, 2, 5, 1, 3, 6);
+        List<Integer> actual = tree.inOrderTraversalRecursive(tree.root);
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
     public void testPreOrderTraversal() {
         List<Node> traversal = new ArrayList<>();
         tree.preOrderTraversal(tree.root, traversal);
 
         List<Node> expected = Arrays.asList(new Node(1),
-                new Node(2), new Node(4),new Node(5),new Node(3),   new Node(6));
+                new Node(2), new Node(4), new Node(5), new Node(3), new Node(6));
 
         assertEquals(expected.toString(), traversal.toString());
+    }
+
+    @Test
+    public void testPreOrderTraversalRecursive() {
+        List<Integer> expected = Arrays.asList(1, 2, 4, 5, 3, 6);
+        List<Integer> actual = tree.preOrderRecursive(tree.root);
+
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -69,14 +88,23 @@ public class TreeTraversal {
         tree.postOrderTraversal(tree.root, traversal);
 
         List<Node> expected = Arrays.asList(
-                new Node(4),new Node(5),new Node(2), new Node(6), new Node(3), new Node(1)  );
+                new Node(4), new Node(5), new Node(2), new Node(6), new Node(3), new Node(1));
 
         assertEquals(expected.toString(), traversal.toString());
     }
 
     @Test
+    public void testPostOrderRecursive() {
+        List<Integer> traversal = tree.postOrderRecursive(tree.root);
+
+        List<Integer> expected = Arrays.asList(4, 5, 2, 6, 3, 1);
+
+        assertEquals(expected, traversal);
+    }
+
+    @Test
     public void testGetLevelWidths() {
-        List<Integer> widths = Arrays.asList(1,2,3);
+        List<Integer> widths = Arrays.asList(1, 2, 3);
         assertEquals(widths, tree.getLevelWidth());
     }
 }
@@ -126,6 +154,31 @@ class BinaryTree {
     }
 
     /**
+     * Recursive version of in order tree traversal
+     *
+     * @param root
+     * @return
+     */
+    List<Integer> inOrderTraversalRecursive(Node root) {
+        List<Integer> traversal = new ArrayList<>();
+
+        Stack<Node> stack = new Stack<>();
+
+        Node curr = root;
+
+        while (curr != null || !stack.isEmpty()) {
+            while (curr != null) {
+                stack.push(curr);
+                curr = curr.left;
+            }
+            curr = stack.pop();
+            traversal.add(curr.data);
+            curr = curr.right;
+        }
+        return traversal;
+    }
+
+    /**
      * 1. Visit node
      * 2. go to left
      * 3. go to right
@@ -139,6 +192,27 @@ class BinaryTree {
 
         if (node.left != null) preOrderTraversal(node.left, traversal);
         if (node.right != null) preOrderTraversal(node.right, traversal);
+    }
+
+    List<Integer> preOrderRecursive(Node node) {
+        List<Integer> traversal = new ArrayList<>();
+        if (node == null) return traversal;
+
+        Stack<Node> stack = new Stack<>();
+
+        Node curr = node;
+
+        while (curr != null || !stack.isEmpty()) {
+            if (curr != null) {
+                stack.push(curr);
+                traversal.add(curr.data);
+                curr = curr.left;
+            } else {
+                curr = stack.pop().right;
+            }
+        }
+
+        return traversal;
     }
 
     /**
@@ -155,6 +229,33 @@ class BinaryTree {
         if (node.left != null) postOrderTraversal(node.left, traversal);
         if (node.right != null) postOrderTraversal(node.right, traversal);
         traversal.add(node);
+    }
+
+    List<Integer> postOrderRecursive(Node node) {
+        List<Integer> traversal = new ArrayList<>();
+        if (node == null) return traversal;
+
+        Stack<Node> stack = new Stack<>();
+
+        Node lastNode = node;
+
+        while (node != null || !stack.isEmpty()) {
+
+            if (node != null) {
+                stack.push(node);
+                node = node.left;
+            } else {
+                Node peek = stack.peek();
+
+                if (peek.right != null && lastNode != peek.right) {
+                    node = peek.right;
+                } else {
+                    traversal.add(peek.data);
+                    lastNode = stack.pop();
+                }
+            }
+        }
+        return traversal;
     }
 
     public List<Integer> getLevelWidth() {
