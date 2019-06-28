@@ -1,7 +1,5 @@
 package com.eprogrammerz.examples.algorithm.trees;
 
-import lombok.ToString;
-
 public class TreeNode {
     int val;
     TreeNode left;

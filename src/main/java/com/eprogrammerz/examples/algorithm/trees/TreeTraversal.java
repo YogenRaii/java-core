@@ -21,7 +21,7 @@ public class TreeTraversal {
      * 4     5        6
      *
      *
-     * postorder: 1 2 4 5 3 6
+     * inorder: 4 2 5 1 3 6
      */
 
     @Before
