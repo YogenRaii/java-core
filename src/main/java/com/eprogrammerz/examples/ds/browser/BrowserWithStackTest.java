@@ -5,11 +5,11 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
-public class BrowserTest {
+public class BrowserWithStackTest {
 
     @Test
     public void testBrowser() {
-        Browser browser = new Browser();
+        BrowserWithStack browser = new BrowserWithStack();
         browser.newPage("yogen.rai");
         assertEquals("yogen.rai", browser.getCurrentAddress());
 

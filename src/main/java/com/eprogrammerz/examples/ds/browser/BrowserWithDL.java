@@ -8,7 +8,7 @@ package com.eprogrammerz.examples.ds.browser;
  * 3. User should be able to click on forward to get the earlier forward page
  * 3. If user enters new address on address bar, loses forward pages but retains backward pages
  */
-public class Browser {
+public class BrowserWithDL {
     private class BrowserState {
         String address;
         BrowserState back;
@@ -24,7 +24,7 @@ public class Browser {
     /**
      * Browser starts with no particular address
      */
-    public Browser() {
+    public BrowserWithDL() {
         this.browserState = new BrowserState("");
     }
 
@@ -56,6 +56,10 @@ public class Browser {
         BrowserState newState = new BrowserState(newAddress);
         newState.forward = null;
         newState.back = browserState;
+
+        if (browserState.forward != null) {
+            browserState.forward.back = null;
+        }
 
         browserState.forward = newState;
         browserState = newState;
