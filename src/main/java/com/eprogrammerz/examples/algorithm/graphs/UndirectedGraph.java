@@ -19,10 +19,6 @@ public class UndirectedGraph {
             throw new IllegalArgumentException("Graph should have at least one Node.");
         }
 
-        if (start.id == targetId) {
-            return start;
-        }
-
         Queue<Node> neighbors = new LinkedList<>();
         neighbors.add(start);
 
@@ -42,5 +38,37 @@ public class UndirectedGraph {
         }
 
         return null;
+    }
+
+    public List<Integer> findPath(Node start, int targetId) {
+        List<List<Integer>> paths = new ArrayList<>();
+        findPath(start, targetId, paths, new ArrayList<>());
+
+        List<Integer> shortest = paths.stream().min(Comparator.comparingInt(List::size)).orElse(null);
+        return shortest;
+    }
+
+    private void findPath(Node node, int end, List<List<Integer>> paths, List<Integer> temp) {
+        if (node == null) return;
+
+        temp.add(node.id);
+        node.visited = true;
+
+        if (node.id == end) {
+            paths.add(new ArrayList<>(temp));
+            return;
+        }
+
+        List<Node> neighbors = node.connections;
+
+        if (neighbors != null) {
+            for (Node neighbor: neighbors) {
+                if (!neighbor.visited) {
+                    findPath(neighbor, end, paths, temp);
+                    temp.remove(temp.size() - 1);
+                }
+            }
+        }
+
     }
 }
