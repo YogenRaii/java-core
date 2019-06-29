@@ -1,8 +1,6 @@
 package com.eprogrammerz.examples.algorithm.trees;
 
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Stack;
+import java.util.*;
 
 public class Node {
     int data;
@@ -140,6 +138,36 @@ public class Node {
         totalPaths += findPaths(node.right, target, sum);
 
         return totalPaths;
+    }
+
+    /**
+     *          10
+     *       /     \
+     *     7         2
+     *   /   \        \
+     *  3     4        8
+     *         \        \
+     *          5        12
+     *
+     *  pathToTarget(12) = [10,2,8,12]
+     *
+     */
+    public List<Integer> pathToTarget(int target) {
+        List<Integer> path = new ArrayList<>();
+        pathToTarget(this, target, path, new ArrayList<>());
+        return path;
+    }
+
+    private void pathToTarget(Node node, int target, List<Integer> path, List<Integer> tempPath) {
+        if (node == null) return;
+
+        tempPath.add(node.data);
+        if (node.data == target) {
+            path.addAll(tempPath);
+        }
+        pathToTarget(node.left, target, path, tempPath);
+        pathToTarget(node.right, target, path, tempPath);
+        tempPath.remove(tempPath.size() - 1);
     }
 
     @Override
