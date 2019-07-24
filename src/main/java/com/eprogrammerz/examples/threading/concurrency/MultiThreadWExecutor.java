@@ -1,4 +1,4 @@
-package com.eprogrammerz.examples.threading;
+package com.eprogrammerz.examples.threading.concurrency;
 
 import org.junit.Test;
 
