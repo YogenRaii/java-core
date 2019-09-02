@@ -1,20 +1,60 @@
 package com.eprogrammerz.examples.algorithm.general;
 
+import org.junit.Test;
+
 /**
  * Created by 542596 on 3/5/2017.
  */
 public class MatrixRotation {
-    public static void main(String[] args) {
+
+
+    /**
+     * You are given an n x n 2D matrix representing an image.
+     *
+     * Rotate the image by 90 degrees (clockwise).
+     *
+     * @param matrix
+     */
+    public void rotateMatrix(int[][] matrix) {
+        int n = matrix.length;
+        for (int r = 0; r < n / 2; r++) {
+            for (int c = r; c < n - 1 - r; c++) {
+                int temp = matrix[r][c];
+                // left to top
+                matrix[r][c] = matrix[n - 1 - c][r];
+                // bottom to left
+                matrix[n - 1 - c][r] = matrix[n - 1 -r][n - 1 - c];
+                // right to bottom
+                matrix[n - 1 - r][n - 1 - c] = matrix[c][n - 1 - r];
+                // top to right
+                matrix[c][n - 1 - r] = temp;
+            }
+        }
+    }
+
+    @Test
+    public void testRotateMatrix() {
         int[][] twoD = new int[][]{
                 /*{1,2},
                 {3,4}*/
-                {1,2,3},
+                /*{1,2,3},
                 {4,5,6},
-                {7,8,9}
+                {7,8,9}*/
+                {1,2,3,4},
+                {6,7,8,9},
+                {10,11,12,13},
+                {14,15,16,17}
         };
-        flipMatrix(twoD);
-        for(int i = 0; i< twoD.length; i++) {
-            for(int j = 0; j <twoD[0].length; j++) {
+        System.out.println("Before rotation:");
+        printMatrix(twoD);
+        rotateMatrix(twoD);
+        System.out.println("After rotation:");
+        printMatrix(twoD);
+    }
+
+    private void printMatrix(int[][] twoD) {
+        for (int i = 0; i < twoD.length; i++) {
+            for (int j = 0; j < twoD[0].length; j++) {
                 System.out.print(twoD[i][j] + "  ");
             }
             System.out.println();
@@ -44,5 +84,18 @@ public class MatrixRotation {
             reversedData[i] = singleRow[(singleRow.length - i -1)];
         }
         return reversedData;
+    }
+
+    @Test
+    public void testFlipMatrix() {
+        int[][] twoD = new int[][]{
+                /*{1,2},
+                {3,4}*/
+                {1,2,3},
+                {4,5,6},
+                {7,8,9}
+        };
+        flipMatrix(twoD);
+        printMatrix(twoD);
     }
 }
