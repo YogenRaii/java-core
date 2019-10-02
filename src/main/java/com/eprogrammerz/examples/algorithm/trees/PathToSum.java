@@ -6,7 +6,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.hamcrest.Matchers.contains;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 
 /**
  * Given a binary tree and a sum, find all root-to-leaf paths where each path’s sum equals the given sum.
@@ -31,15 +33,15 @@ import static org.junit.Assert.assertEquals;
 public class PathToSum {
     public List<List<Integer>> pathSum(TreeNode root, int target) {
         List<List<Integer>> paths = new ArrayList<>();
-        pathSum(root, target, paths, new ArrayList<>(), 0);
+        pathSum(root, target, paths, new ArrayList<>());
         return paths;
     }
 
-    private void pathSum(TreeNode root, int target, List<List<Integer>> paths, List<Integer> path, int sum) {
+    private void pathSum(TreeNode root, int target, List<List<Integer>> paths, List<Integer> path) {
         if (root == null) return;
 
         if (root.left == null && root.right == null) {
-            if (sum + root.val == target) {
+            if (root.val == target) {
                 path.add(root.val);
 
                 paths.add(new ArrayList<>(path));
@@ -49,8 +51,8 @@ public class PathToSum {
         }
         path.add(root.val);
 
-        pathSum(root.left, target, paths, path, sum + root.val);
-        pathSum(root.right, target, paths, path, sum + root.val);
+        pathSum(root.left, target - root.val, paths, path);
+        pathSum(root.right, target - root.val, paths, path);
         path.remove(path.size() - 1);
     }
 
@@ -82,7 +84,7 @@ public class PathToSum {
         // add right node to rightest node on last level
         root.right.right.right = new TreeNode(10);
         List<List<Integer>> actual2 = pathSum(root, 24);
-        assertEquals(Arrays.asList(Arrays.asList(6, 7, 1, 10)), actual2);
+        assertThat(actual2, contains(Arrays.asList(6, 7, 1, 10)));
 
     }
 }
