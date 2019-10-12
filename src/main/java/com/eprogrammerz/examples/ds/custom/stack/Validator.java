@@ -70,4 +70,17 @@ public class Validator {
         assertEquals(4, sortedStack.pop());
         assertEquals(5, sortedStack.pop());
     }
+
+    @Test
+    public void testStackWQueue() {
+        StackWQueue stack = new StackWQueue();
+        stack.push(1);
+        stack.push(2);
+        stack.push(3);
+        assertEquals(3, stack.pop());
+        assertEquals(2, stack.pop());
+        stack.push(4);
+        assertEquals(4, stack.pop());
+        assertEquals(1, stack.pop());
+    }
 }
