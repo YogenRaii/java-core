@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.hamcrest.Matchers.contains;
+import static org.hamcrest.CoreMatchers.hasItems;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
@@ -84,7 +84,7 @@ public class PathToSum {
         // add right node to rightest node on last level
         root.right.right.right = new TreeNode(10);
         List<List<Integer>> actual2 = pathSum(root, 24);
-        assertThat(actual2, contains(Arrays.asList(6, 7, 1, 10)));
+        assertThat(actual2, hasItems(Arrays.asList(6, 7, 1, 10)));
 
     }
 }
