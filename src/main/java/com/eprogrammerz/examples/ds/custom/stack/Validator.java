@@ -83,4 +83,44 @@ public class Validator {
         assertEquals(4, stack.pop());
         assertEquals(1, stack.pop());
     }
+
+    @Test
+    public void testFreqStack1() {
+        FreqStack stack = new FreqStack();
+        stack.push(5);
+        stack.push(7);
+        stack.push(5);
+        stack.push(7);
+        stack.push(4);
+        stack.push(5);
+        assertEquals(5, stack.pop());
+        assertEquals(7, stack.pop());
+        assertEquals(5, stack.pop());
+        assertEquals(4, stack.pop());
+    }
+
+    @Test
+    public void testFreqStack2() {
+        FreqStack stack = new FreqStack();
+        stack.push(5);
+        stack.push(1);
+        stack.push(2);
+        stack.push(5);
+        stack.push(5);
+        stack.push(5);
+        stack.push(1);
+        stack.push(6);
+        stack.push(1);
+        stack.push(5);
+        assertEquals(5, stack.pop()); // 5 -> 5, 1 -> 3
+        assertEquals(5, stack.pop()); // 5 -> 4, 1 -> 3
+        assertEquals(1, stack.pop()); // 5 -> 3, 1 -> 3
+        assertEquals(5, stack.pop()); // 5 -> 3, 1 -> 2
+        assertEquals(1, stack.pop()); // 5 -> 2, 1 -> 2
+        assertEquals(5, stack.pop()); // 5 -> 2, 1 -> 1
+        assertEquals(6, stack.pop()); // 5 -> 1, 1 -> 1
+        assertEquals(2, stack.pop()); // 5 -> 1, 1 -> 1
+        assertEquals(1, stack.pop()); // 5 -> 1, 1 -> 1
+        assertEquals(5, stack.pop()); // 5 -> 1, 1 -> 1
+    }
 }
