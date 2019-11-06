@@ -38,13 +38,12 @@ public class Combinations {
     private void backTrack(int n, int start, int k, List<List<Integer>> l, List<Integer> temp) {
         if (temp.size() == k) {
             l.add(new ArrayList<>(temp));
-            temp.remove(temp.size() - 1);
         } else {
             for (int i = start; i <= n; i++) {
                 temp.add(i);
                 backTrack(n, i + 1, k, l, temp);
+                temp.remove(temp.size() - 1);
             }
-             if (!temp.isEmpty()) temp.remove(temp.size() - 1);
         }
     }
 
