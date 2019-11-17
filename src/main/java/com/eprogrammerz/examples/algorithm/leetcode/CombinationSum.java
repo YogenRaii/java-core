@@ -31,7 +31,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class CombinationSum {
 
     /**
-     * Time - O(n)
+     * Time - O(n!)
      * Space - O(n)
      *
      * @param candidates
@@ -52,18 +52,16 @@ public class CombinationSum {
     private void backTrack(int[] candidates, int start, List<Integer> temp, List<List<Integer>> r, int target) {
         if (target == 0) { // found the set of element
             r.add(new ArrayList<>(temp));
-            temp.remove(temp.size() - 1);
         } else {
             for (int i = start; i < candidates.length; i++) {
                 int n = candidates[i];
 
-                if (target - n < 0) break;
+                if (target - n < 0) return;
 
                 temp.add(n);
                 backTrack(candidates, i, temp, r, target - n);
-            }
-            if (temp.size() > 0)
                 temp.remove(temp.size() - 1);
+            }
         }
     }
 
