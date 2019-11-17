@@ -62,4 +62,26 @@ public class CoinChangeII {
         assertEquals(0, change(500, new int[]{}));
         assertEquals(1, change(0, new int[]{}));
     }
+
+    public int changeDp(int amount, int[] coins) {
+        int[] dp = new int[amount + 1];
+        dp[0] = 1;
+
+        for (int i = 0; i < coins.length; i++) {
+            for (int j = coins[i]; j < dp.length; j++) {
+                dp[j] += dp[j - coins[i]];
+            }
+        }
+        return dp[amount];
+    }
+
+    @Test
+    public void testDp() {
+        assertEquals(4, changeDp(5, new int[]{1, 2, 5}));
+        assertEquals(0, changeDp(3, new int[]{2}));
+        assertEquals(1, changeDp(10, new int[]{10}));
+        assertEquals(35502874, changeDp(500, new int[]{3, 5, 7, 8, 9, 10, 11}));
+        assertEquals(0, changeDp(500, new int[]{}));
+        assertEquals(1, changeDp(0, new int[]{}));
+    }
 }
