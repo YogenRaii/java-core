@@ -1,4 +1,4 @@
-package com.eprogrammerz.examples.ds.custom.trie;
+package com.eprogrammerz.examples.algorithm.general;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,12 +17,12 @@ class ProductService {
 
         List<Product> result = new ArrayList<>();
 
-        if (cProducts != null && cProducts.size() > 0) {
-            result.addAll(cProducts);
-        }
-        Category category = categoryMap.get(categoryName);
-        if (category != null) {
-            List<Category> subCategories = category.getSubCategories();
+        if (cProducts == null || cProducts.isEmpty()) return result;
+
+        result.addAll(cProducts);
+
+        for (Product product: cProducts) {
+            List<Category> subCategories = product.getCategory().getSubCategories();
             if (subCategories != null) {
                 for (Category c : subCategories) {
                     List<Product> subProducts = findByCategory(products, c.getName());
@@ -30,47 +30,27 @@ class ProductService {
                 }
             }
         }
+
         return result;
     }
 
     private void createCategoryProductsMap(List<Product> products) {
         this.categoryProducts = new HashMap<>();
-        this.categoryMap = new HashMap<>();
 
         for (Product product: products) {
             Category category = product.getCategory();
 
+            if (!this.categoryProducts.containsKey(category.getName())) {
+                this.categoryProducts.put(category.getName(), new ArrayList<>());
+            }
             List<Product> existing = this.categoryProducts.get(category.getName());
 
-            if (existing == null) {
-                List<Product> newList = new ArrayList<>();
-                newList.add(product);
-
-                this.categoryProducts.put(category.getName(), newList);
-            } else {
-                existing.add(product);
-            }
-            populateCategoryMap(category);
+            existing.add(product);
         }
 
-    }
-
-    private void populateCategoryMap(Category category) {
-        if (!categoryMap.containsKey(category.getName())) {
-            categoryMap.put(category.getName(), category);
-
-            List<Category> subCategories = category.getSubCategories();
-
-            if (subCategories != null) {
-                for (Category subCategory: subCategories) {
-                    populateCategoryMap(subCategory);
-                }
-            }
-        }
     }
 
     private Map<String, List<Product>> categoryProducts = null;
-    private Map<String, Category> categoryMap = null;
 }
 
 public class ProductCategoryTest {
@@ -125,7 +105,7 @@ public class ProductCategoryTest {
 
         List<Product> apparels = pc.findByCategory(products, apparel.getName());
         System.out.println(apparels);
-        assertEquals(2, apparels.size());
+        assertEquals(1, apparels.size());
 
         List<Product> sportsProducts = pc.findByCategory(products, sports.getName());
         System.out.println(sportsProducts);
