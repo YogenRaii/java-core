@@ -2,19 +2,37 @@ package com.eprogrammerz.examples.ds.custom.map;
 
 public class MyMap<K, V> {
     private Entry<K, V>[] buckets;
-    private static final int INITIAL_CAPACITY = 1 << 4; // 16
+    private int capacity; // 16
 
     private int size = 0;
 
+    private double lf = 0.75;
+
     public MyMap() {
-        this(INITIAL_CAPACITY);
+        this(16);
     }
 
     public MyMap(int capacity) {
-        this.buckets = new Entry[capacity];
+        this.capacity = capacity;
+        this.buckets = new Entry[this.capacity];
     }
 
     public void put(K key, V value) {
+        if (size == lf * capacity) {
+            // rehash
+            Entry<K, V>[] old = buckets;
+
+            capacity *= 2;
+            size = 0;
+            buckets = new Entry[capacity];
+
+            for (Entry<K,V> e: old) {
+                while (e != null) {
+                    put(e.key, e.value);
+                    e = e.next;
+                }
+            }
+        }
         Entry<K, V> entry = new Entry<>(key, value, null);
 
         int bucket = getHash(key) % getBucketSize();

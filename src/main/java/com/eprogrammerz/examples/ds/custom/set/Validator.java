@@ -10,7 +10,7 @@ import static junit.framework.TestCase.assertEquals;
 public class Validator {
     @Test
     public void testMyHashSet() {
-        MyHashSet<String> set = new MyHashSet<>();
+        MyHashSet<String> set = new MyHashSet<>(3);
 
         set.add("USA");
         set.add("Nepal");

@@ -30,7 +30,7 @@ import java.util.NoSuchElementException;
  */
 public class MyHashSet<T> {
 
-    private static final Integer INITIAL_CAPACITY = 1 << 4; // 16
+    private int capacity = 0;
 
     private Node<T>[] buckets;
 
@@ -42,10 +42,22 @@ public class MyHashSet<T> {
     }
 
     public MyHashSet() {
-        this(INITIAL_CAPACITY);
+        this(16);
     }
 
     public void add(T t) {
+        if (size == 0.75 * capacity) {
+            // rehash
+            capacity *= 2;
+            size = 0;
+
+            for (Node<T> bucket: buckets) {
+                while (bucket != null) {
+                    add(bucket.data);
+                    bucket = bucket.next;
+                }
+            }
+        }
         int index = hashCode(t) % buckets.length;
 
         Node bucket = buckets[index];
