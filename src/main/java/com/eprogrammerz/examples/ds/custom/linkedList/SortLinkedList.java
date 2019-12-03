@@ -22,7 +22,6 @@ public class SortLinkedList {
 
         ListNode right = left.next;
         left.next = null;
-        left = head;
 
         left = sortList(head);
         right = sortList(right);
@@ -34,13 +33,12 @@ public class SortLinkedList {
         while (left != null && right != null) {
             if (left.val <= right.val) {
                 runner.next = left;
-                runner = runner.next;
                 left = left.next;
             } else {
                 runner.next = right;
-                runner = runner.next;
                 right = right.next;
             }
+            runner = runner.next;
         }
 
         if (left != null) {
@@ -100,5 +98,15 @@ public class SortLinkedList {
 
         ListNode res = sortList(n1);
         assertEquals("1 -> 2 -> 3", printList(res));
+    }
+
+    @Test
+    public void test3() {
+        ListNode n1 = new ListNode(1);
+        ListNode n2 = new ListNode(-1);
+        n1.next = n2;
+
+        ListNode res = sortList(n1);
+        assertEquals("-1 -> 1", printList(res));
     }
 }
