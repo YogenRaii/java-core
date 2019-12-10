@@ -123,4 +123,18 @@ public class Validator {
         assertEquals(1, stack.pop()); // 5 -> 1, 1 -> 1
         assertEquals(5, stack.pop()); // 5 -> 1, 1 -> 1
     }
+
+    @Test
+    public void testStackWHeap() {
+        StackWHeap stack = new StackWHeap();
+        stack.push(1);
+        stack.push(2);
+        stack.push(3);
+        stack.push(1);
+
+        assertEquals(1, stack.pop());
+        assertEquals(3, stack.pop());
+        assertEquals(2, stack.pop());
+        assertEquals(1, stack.pop());
+    }
 }
