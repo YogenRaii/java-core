@@ -137,4 +137,56 @@ public class Validator {
         assertEquals(2, stack.pop());
         assertEquals(1, stack.pop());
     }
+
+    @Test
+    public void testDinnerPlate1() {
+        DinnerPlates dinnerPlates = new DinnerPlates(2);
+        dinnerPlates.push(1);
+        dinnerPlates.push(2);
+        dinnerPlates.push(3);
+        dinnerPlates.push(4);
+        dinnerPlates.push(5);
+
+        assertEquals(2, dinnerPlates.popAtStack(0));
+
+        dinnerPlates.push(20);
+        dinnerPlates.push(21);
+
+        assertEquals(20, dinnerPlates.popAtStack(0));
+        assertEquals(21, dinnerPlates.popAtStack(2));
+        assertEquals(5, dinnerPlates.pop());
+        assertEquals(4, dinnerPlates.pop());
+        assertEquals(3, dinnerPlates.pop());
+        assertEquals(1, dinnerPlates.pop());
+        assertEquals(-1, dinnerPlates.pop());
+    }
+
+    @Test
+    public void testDinnerPlate2() {
+        DinnerPlates dinnerPlates = new DinnerPlates(2);
+        dinnerPlates.push(1);
+        dinnerPlates.push(2);
+        dinnerPlates.push(3);
+        dinnerPlates.push(4);
+        dinnerPlates.push(5);
+        dinnerPlates.push(6);
+        dinnerPlates.push(7);
+
+        assertEquals(4, dinnerPlates.popAtStack(1));
+        assertEquals(3, dinnerPlates.popAtStack(1));
+
+
+        assertEquals(6, dinnerPlates.popAtStack(2));
+        assertEquals(5, dinnerPlates.popAtStack(2));
+
+
+        assertEquals(7, dinnerPlates.popAtStack(3));
+
+        dinnerPlates.push(12);
+        assertEquals(12, dinnerPlates.popAtStack(1));
+
+        assertEquals(2, dinnerPlates.pop());
+        assertEquals(1, dinnerPlates.pop());
+        assertEquals(-1, dinnerPlates.pop());
+    }
 }
