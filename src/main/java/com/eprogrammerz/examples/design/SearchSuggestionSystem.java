@@ -5,7 +5,6 @@ import org.junit.Test;
 import java.util.*;
 
 import static java.util.Arrays.asList;
-
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -16,16 +15,14 @@ public class SearchSuggestionSystem {
     public List<List<String>> suggestedProducts(String[] products, String searchWord) {
         Trie trie = new Trie();
 
-        Arrays.sort(products);
-
         for (String product: products) {
             trie.insert(product);
         }
 
         List<List<String>> l = new ArrayList<>();
 
-        for (int i = 0; i <= searchWord.length(); i++) {
-            trie.search(searchWord.substring(0, i), l);
+        for (int i = 1; i <= searchWord.length(); i++) {
+            l.add(trie.search(searchWord.substring(0, i)));
         }
 
         return l;
@@ -35,7 +32,7 @@ public class SearchSuggestionSystem {
         TrieNode root;
 
         Trie() {
-            this.root = new TrieNode('#');
+            this.root = new TrieNode();
         }
 
 
@@ -43,45 +40,56 @@ public class SearchSuggestionSystem {
 
             TrieNode curr = root;
 
+            List<TrieNode> visited = new ArrayList<>();
+
             for (char ch: word.toCharArray()) {
                 if (curr.child[ch - 'a'] == null) {
-                    curr.child[ch - 'a'] = new TrieNode(ch);
+                    curr.child[ch - 'a'] = new TrieNode();
                 }
                 curr = curr.child[ch - 'a'];
-                curr.words.add(word);
+
+                visited.add(curr);
+            }
+
+            for (TrieNode node: visited) {
+                node.updateTop(word);
             }
         }
 
-        public void search(String str, List<List<String>> l) {
-            if (str.length() == 0) return;
+        public List<String> search(String str) {
+            if (str.length() == 0) return Collections.emptyList();
             TrieNode curr = root;
             for (char ch: str.toCharArray()) {
                 if (curr.child[ch - 'a'] == null) {
-                    l.add(new ArrayList<>());
-                    return;
+                    return Collections.emptyList();
                 } else {
                     curr = curr.child[ch - 'a'];
 
                 }
             }
 
-
-            List<String> suggestions = new ArrayList<>();
-            for (int i = 0; i < curr.words.size() && i < 3; i++) {
-                suggestions.add(curr.words.get(i));
-            }
-            l.add(suggestions);
+            return new LinkedList<>(curr.top);
         }
     }
     class TrieNode {
-        char val;
         TrieNode[] child;
-        List<String> words;
+        LinkedList<String> top;
 
-        TrieNode(char val) {
-            this.val = val;
+        TrieNode() {
             this.child = new TrieNode[26];
-            this.words = new LinkedList<>();
+            this.top = new LinkedList<>();
+        }
+
+        public void updateTop(String word) {
+            if (!top.contains(word)) {
+                top.add(word);
+            }
+
+            top.sort(Comparator.naturalOrder());
+
+            if (top.size() > 3) {
+                top.removeLast();
+            }
         }
     }
 
