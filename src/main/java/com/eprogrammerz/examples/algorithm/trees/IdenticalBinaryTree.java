@@ -75,7 +75,7 @@ public class IdenticalBinaryTree {
     public int isSameTreeRecursive(TreeNode root1, TreeNode root2) {
         if (root1 == null && root2 == null) return 1;
 
-        if ((root1 != null && root2 == null) || (root1 == null && root2 != null)) return 0;
+        if (root1 == null || root2 == null) return 0;
 
         if (root1.val != root2.val) return 0;
 
