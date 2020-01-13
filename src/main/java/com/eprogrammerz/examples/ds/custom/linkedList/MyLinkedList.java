@@ -2,12 +2,21 @@ package com.eprogrammerz.examples.ds.custom.linkedList;
 
 public class MyLinkedList<T> {
     private Node<T> head;
+    private Node<T> tail;
+
     private int size;
 
     public MyLinkedList() {}
 
     public void addFirst(T t) {
-        this.head = new Node<>(t, this.head);
+        Node<T> node = new Node<>(t);
+        if (head == null) {
+            head = node;
+            tail = node;
+        } else {
+            node.next = head;
+            head = node;
+        }
         size++;
     }
 
@@ -20,14 +29,11 @@ public class MyLinkedList<T> {
         Node<T> node = new Node<>(t);
         if (head == null) {
             head = node;
+            tail = node;
+        } else {
+            tail.next = node;
+            tail = node;
         }
-
-        Node<T> current = head;
-
-        while (current.next != null) {
-            current = current.next;
-        }
-        current.next = node;
 
         // increment size
         size++;
@@ -35,12 +41,7 @@ public class MyLinkedList<T> {
 
     public T getLast() {
         if (head == null) return null;
-        Node<T> node = head;
-
-        while (node.next != null) {
-            node = node.next;
-        }
-        return node.data;
+        return tail.data;
     }
 
     public T getAt(int idx) {
@@ -132,11 +133,6 @@ public class MyLinkedList<T> {
         public Node(T data) {
             this.data = data;
             this.next = null;
-        }
-
-        public Node(T data, Node next) {
-            this.data = data;
-            this.next = next;
         }
 
         @Override
