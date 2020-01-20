@@ -14,63 +14,65 @@ import static org.junit.Assert.assertEquals;
  * Given 1->2->3->4->5->NULL, m = 2 and n = 4,
  *
  * return 1->4->3->2->5->NULL.
+ *
+ * https://leetcode.com/problems/reverse-linked-list-ii/
  */
 public class ReverseListII {
     public ListNode reverseBetween(ListNode head, int m, int n) {
-        if (head.next == null) return head;
+        ListNode prev = null;
+        ListNode next = null;
 
-        /**
-         * Get first half f1 (0 -> m - 1)
-         * Traverse and create reversed list (m -> n) mid
-         * f1.next = mid
-         */
+        // if m == 1, then head needed to be updated
 
-        ListNode tracker = head;
-        ListNode f1Tail = head;
+        int i = 1;
 
-        ListNode resultHead = tracker;
-        for (int i = 1; i < m; i++) {
-            f1Tail = tracker;
-            tracker = tracker.next;
+        ListNode runner = head;
+        while (runner != null) {
+            if (i == m - 1) {
+                prev = runner;
+            }
+
+            if (i == n) {
+                next = runner.next;
+                break;
+            }
+
+            runner = runner.next;
+            i++;
         }
 
 
-        ListNode next = tracker.next;
+        ListNode part = prev == null ? head: prev.next;
 
-        ListNode midHead = tracker;
-        midHead.next = null;
+        if (prev != null)
+            prev.next = null;
 
-        ListNode midTail = tracker;
-        for (int i = m; i < n; i++) {
-            ListNode temp = midHead;
-            ListNode nextTemp = next.next;
-            midHead = next;
-            midHead.next = temp;
-            next = nextTemp;
+        runner.next = null;
+
+        ListNode rhead = reverse(part);
+
+        if (prev != null)
+            prev.next = rhead;
+        else head = rhead;
+
+        while (rhead.next != null) {
+            rhead = rhead.next;
         }
 
-        midTail.next = next;
-        f1Tail.next = midHead;
+        rhead.next = next;
 
-        return resultHead;
+        return head;
     }
 
-    public ListNode reverse(ListNode node) {
-        if (node == null) return null;
+    private ListNode reverse(ListNode head) {
+        if (head.next == null) return head;
 
-        ListNode current = node;
+        ListNode node = reverse(head.next);
 
-        ListNode next = current.next;
+        head.next.next = head;
+        head.next = null;
 
-        current.next = null;
-
-        while (next != null) {
-            ListNode temp = next.next;
-            next.next = current;
-            current = next;
-            next = temp;
-        }
-        return current;
+        return node;
     }
 
     @Test
