@@ -2,8 +2,53 @@ package com.eprogrammerz.examples.ds.custom.stack;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.PriorityQueue;
+import java.util.Stack;
 
 public class FreqStack {
+    private Map<Integer, Integer> map;
+    private Map<Integer, Stack<Integer>> timestamp;
+    private PriorityQueue<Integer> pq;
+    private int count;
+
+    public FreqStack() {
+        this.map = new HashMap<>();
+        this.timestamp = new HashMap<>();
+        this.pq = new PriorityQueue<>((e1, e2) -> map.get(e1).equals(map.get(e2)) ?
+                timestamp.get(e2).peek() - timestamp.get(e1).peek() :
+                map.get(e2) - map.get(e1));
+    }
+
+    public void push(int x) {
+        map.put(x, map.getOrDefault(x, 0) + 1);
+        timestamp.computeIfAbsent(x, s -> new Stack<>()).push(count++);
+
+        if (map.get(x) == 1) {
+            pq.offer(x);
+        } else {
+            PriorityQueue<Integer> temp = new PriorityQueue<>();
+            while (!pq.isEmpty()) temp.add(pq.poll());
+
+            pq.addAll(temp);
+        }
+    }
+
+    public int pop() {
+        int curr = pq.poll();
+
+        int count = map.get(curr) - 1;
+
+        if (count == 0) {
+            map.remove(curr);
+            timestamp.remove(curr);
+        } else {
+            map.put(curr, count);
+            timestamp.get(curr).pop();
+            pq.offer(curr);
+        }
+        return curr;
+    }
+    /*
     private Node head;
     private Map<Integer, Integer> map;
 
@@ -67,4 +112,6 @@ public class FreqStack {
             this.next = null;
         }
     }
+
+     */
 }
