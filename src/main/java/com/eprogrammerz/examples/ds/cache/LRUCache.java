@@ -24,12 +24,13 @@ import java.util.PriorityQueue;
  */
 public class LRUCache<K, V> {
 
-    private class Node<K,V> {
+
+    private class Node<K, V> {
         K key;
         V value;
 
-        Node<K,V> next;
-        Node<K,V> prev;
+        Node<K, V> next;
+        Node<K, V> prev;
 
         Node(K key, V value) {
             this.key = key;
@@ -42,6 +43,91 @@ public class LRUCache<K, V> {
         }
     }
 
+    private Map<K, Node<K, V>> map;
+    private DDList list;
+    private int capacity;
+
+    private int size;
+
+    public LRUCache(int capacity) {
+        this.capacity = capacity;
+        this.map = new HashMap<>();
+        this.list = new DDList();
+    }
+
+    public V get(K key) {
+        Node<K, V> node = map.get(key);
+
+        if (node == null) return null;
+
+        list.removeNode(node);
+        list.addToHead(node);
+
+        return node.value;
+    }
+
+    public void put(K key, V value) {
+        Node<K, V> node = map.get(key);
+
+        if (node != null) {
+            node.value = value;
+
+            list.removeNode(node);
+            list.addToHead(node);
+
+            return;
+        }
+
+        node = new Node<>(key, value);
+
+        if (size == capacity) {
+            Node last = list.removeTail();
+            map.remove(last.key);
+
+            size--;
+        }
+
+        list.addToHead(node);
+        size++;
+        map.put(key, node);
+    }
+
+    class DDList {
+        Node<K, V> head;
+        Node<K, V> tail;
+
+        DDList() {
+            this.head = new Node(0, 0);
+            this.tail = new Node(0, 0);
+            this.head.next = tail;
+            this.tail.prev = head;
+        }
+
+        public void addToHead(Node node) {
+            node.next = head.next;
+            node.prev = head;
+
+            head.next.prev = node;
+            head.next = node;
+        }
+
+        public void removeNode(Node node) {
+            node.next.prev = node.prev;
+            node.prev.next = node.next;
+
+        }
+
+        public Node removeTail() {
+            if (tail.prev == head) return null;
+            Node node = tail.prev;
+            removeNode(node);
+
+            return node;
+        }
+    }
+}
+
+/*
     private int size;
 
     private Map<K,Node<K,V>> map;
@@ -107,5 +193,6 @@ public class LRUCache<K, V> {
         if (tail == node) tail = node.prev;
         if (head == node) head = node.next;
     }
+    }
+*/
 
-}
