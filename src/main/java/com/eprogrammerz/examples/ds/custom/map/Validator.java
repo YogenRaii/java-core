@@ -13,7 +13,7 @@ public class Validator {
         myMap.put("USA", "Washington DC");
         myMap.put("Nepal", "Kathmandu");
         myMap.put("India", "New Delhi");
-        myMap.put("Australia", "Sydney");
+        myMap.put("Canberra", "Sydney");
 
         assertNotNull(myMap);
         assertEquals(4, myMap.size());
